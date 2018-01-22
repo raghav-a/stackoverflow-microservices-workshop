@@ -1,0 +1,26 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.agilefaqs.stackoverflow</groupId>
+    <artifactId>stackoverflow-microservices-workshop</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>gateway-service</module>
+        <module>discovery-service</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Brixton.RELEASE</version>
+    </parent>
+
+    <properties>
+        <spring.boot>1.4.2.RELEASE</spring.boot>
+        <spring.boot.eureka>1.2.2.RELEASE</spring.boot.eureka>
+        <java.version>1.8</java.version>
+    </properties>
+
+
+</project>

@@ -1,0 +1,7 @@
+applications:
+- name: eureka-discovery-service
+  memory: 800M
+
+env:
+    JBP_CONFIG_TOMCAT: "{ tomcat: { arguments: "-server.tomcat.max-threads=40" }"
+    JAVA_OPTS: -DXms=400m -DXmx=400m
