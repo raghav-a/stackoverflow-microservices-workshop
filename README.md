@@ -6,7 +6,7 @@
 www.stackoverflow.com  
 
 
-##Features for MVP##
+## Features for MVP
 
 * Post questions 
 * Answer questions
@@ -15,7 +15,7 @@ www.stackoverflow.com
 * Search questions
 
 
-##Micro Services##
+## Micro Services
 
 **1) Users**
 ```
