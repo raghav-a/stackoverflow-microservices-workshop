@@ -17,7 +17,7 @@ Features for MVP
 
 Micro Services
 
-1) Users
+**1) Users
 ```
 saveProfile 
 request -  userdetails {“name”:”..” ...}
@@ -33,7 +33,8 @@ response - 200 userdetails {“name”:”” ...}
 
 ```
 
-2) Sessions
+**2) Sessions
+```
 login
 request  -  {“userId”:”...”, “password”:”...”}
 response - 200 {“token”:”..”}
@@ -42,8 +43,9 @@ validateToken
 request -  {“token”:”...”}
 response - 200 {“userId”:”..”}
 
-3) Questions
-
+```
+**3) Questions
+```
 post (authenicated)
 request  -  {“quetion”:”...”, “tags”:”...”}
 response - 201 {“questionId”:”..”}
@@ -62,9 +64,11 @@ response - 200
 get
 request  -  {“quetionId”:”...”}
 response - 200 {“questionId”:”..”, “question”:”...”, “votes”:”...”, “tags”:”...”}
+```
 
-4) Answers
-post (authenicated)
+**4) Answers
+
+```post (authenicated)
 request  -  {“quetionId”:”...”, “answer”:”...”}
 response - 201 {“answerId”:”..”}
 
@@ -91,8 +95,9 @@ response - 200         [
             {“answer”:”...”, “votes”:”...”, “userName”:”...”},
              ...
            ]
-5) Search
-
+```           
+**5) Search
+```
 search
 request  -  {“searchText”:”...”}
 response - 200 [
@@ -100,4 +105,4 @@ response - 200 [
  {“questionId”:”...”, “question”:”...”,“votes”:”...”, “userName”:”...”},
       ...
   ]
-
+```
