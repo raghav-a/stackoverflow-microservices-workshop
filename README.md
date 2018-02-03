@@ -8,11 +8,11 @@ www.stackoverflow.com
 
 Features for MVP 
 
-Post questions (with tags)
-Answer questions
-upvote/downvote questions
-upvote/downvote answers
-Search questions
+* Post questions 
+* Answer questions
+* upvote/downvote questions
+* upvote/downvote answers
+* Search questions
 
 
 Micro Services
