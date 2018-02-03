@@ -18,6 +18,7 @@ Features for MVP
 Micro Services
 
 1) Users
+```
 saveProfile 
 request -  userdetails {“name”:”..” ...}
 response - 201 {“userId”:”..”}
@@ -29,6 +30,8 @@ response - 200
 getProfile (authenticated)
 request  -  userId
 response - 200 userdetails {“name”:”” ...}
+
+```
 
 2) Sessions
 login
