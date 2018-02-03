@@ -15,6 +15,8 @@ www.stackoverflow.com
 * Search questions
 
 
+![alt text](https://github.com/raghav-a/stackoverflow-microservices-workshop/blob/master/Stackoverflow.jpg)
+
 ## Micro Services AND APIS
 
 **1) Users**
