@@ -1,0 +1,35 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'com.agilefaqs.stackoverflow'
+  version = '1.0-SNAPSHOT'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
+    }
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'idea'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    testCompile("junit:junit")
+  }
+}

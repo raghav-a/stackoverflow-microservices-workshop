@@ -1,10 +1,7 @@
-
-# Created by .ignore support plugin (hsz.mobi)
 .idea
-gateway-service/gateway.iml
-spring-micro-services.iml
-user-service/user-service.iml
-session-service/session-service.iml
-discovery-service/discovery-service.iml
-discovery-service/target/
-gateway-service/target/
+*.iml
+target/
+build/
+gradle/
+.gradle/
+out/
