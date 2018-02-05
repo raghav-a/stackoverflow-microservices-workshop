@@ -1,1 +1,6 @@
 description = 'Search service'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE")
+//    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
