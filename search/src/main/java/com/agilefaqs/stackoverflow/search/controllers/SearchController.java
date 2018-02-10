@@ -1,4 +1,4 @@
-package com.agilefaqs.controllers;
+package com.agilefaqs.stackoverflow.search.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

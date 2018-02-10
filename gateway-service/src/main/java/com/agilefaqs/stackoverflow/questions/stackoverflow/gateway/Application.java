@@ -1,4 +1,4 @@
-package com.agilefaqs.stackoverflow.gateway;
+package com.agilefaqs.stackoverflow.questions.stackoverflow.gateway;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

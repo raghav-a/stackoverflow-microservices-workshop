@@ -1,4 +1,4 @@
-package com.agilefaqs.stackoverflow.eureka;
+package com.agilefaqs.stackoverflow.questions.stackoverflow.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
