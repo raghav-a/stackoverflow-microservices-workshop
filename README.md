@@ -1,9 +1,59 @@
 # stackoverflow-microservices-workshop
 
-
-
-
 www.stackoverflow.com  
+
+Join us for a deep dive into the nuances of breaking a large complex system into smaller independently scalable microservices.
+
+This will be a hands on workshop that will introduce you to the microservices ecosystem. We will be looking into the design considerations and the components that one might need to put together to build and manage such an application.
+
+By following along and building the application you will learn concepts such as
+
+Gateway/edge services
+Service discovery
+Load balancing
+Inter-service communication and protocols
+Resilience
+Fault tolerance
+Circuit breaker pattern
+Autoscaling
+We will be using SpringBoot to build the application and Pivotal Cloud Foundry to deploy the same. Bring your laptops and join us for the ride.
+
+ 
+ Outline/structure of the Session
+Iteration 0
+Introduction to problem statement
+Design exercise
+Iteration 1
+Starting with a service
+Deploying to Pivotal Cloud Foundry
+Iteration 2
+Introducing a Gateway
+Client side load balancing with built in support
+Iteration 3
+Adding service discovery with Eureka
+MarketPlace Eureka on Pivotal Cloud Foundry
+Iteration 4
+Authenticating requests at gateway
+Break
+Iteration 5
+Consuming APIs with Feign
+Client side load balancing with Ribbon
+Iteration 6
+Autoscaling services
+Iteration 7
+Circuit Breaker with Hystrix
+Monitoring with Hystrix Dashboard
+MarketPlace Hystrix on Pivotal Cloud Foundry
+Q & A
+Each iteration will be 5 to 10 min in duration.
+
+Learning Outcome
+Architecting with scale in mind
+Breaking down complex systems into small, independently scalable microservices
+The need for gateways, service registry, auto-scaling and circuit breaker patterns
+A primer for anyone looking to get started with building Cloud Native applications
+Target Audience
+Software engineers, architects, technical leaders and anyone interested in micro-services and cloud architecture.
 
 
 ## Features for MVP
