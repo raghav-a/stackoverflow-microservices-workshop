@@ -23,24 +23,24 @@ We will be using SpringBoot to build the application and Pivotal Cloud Foundry t
 Iteration 0
 Introduction to problem statement
 Design exercise
-Iteration 1
+* Iteration 1
 Starting with a service
 Deploying to Pivotal Cloud Foundry
-Iteration 2
+* Iteration 2
 Introducing a Gateway
 Client side load balancing with built in support
-Iteration 3
+* Iteration 3
 Adding service discovery with Eureka
 MarketPlace Eureka on Pivotal Cloud Foundry
-Iteration 4
+* Iteration 4
 Authenticating requests at gateway
 Break
-Iteration 5
+* Iteration 5
 Consuming APIs with Feign
 Client side load balancing with Ribbon
-Iteration 6
+* Iteration 6
 Autoscaling services
-Iteration 7
+* Iteration 7
 Circuit Breaker with Hystrix
 Monitoring with Hystrix Dashboard
 MarketPlace Hystrix on Pivotal Cloud Foundry
