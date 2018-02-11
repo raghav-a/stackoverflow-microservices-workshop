@@ -2,5 +2,6 @@ description = 'questions service'
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }

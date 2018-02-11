@@ -1,33 +1,11 @@
-
 description = ''
+
 dependencies {
-    compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version:'1.1.0.RELEASE') {
-exclude(module: 'guice-grapher')
-exclude(module: 'guice-assistedinject')
-exclude(module: 'jsr166y')
-exclude(module: 'xbean-finder')
-exclude(module: 'asm-all')
-exclude(module: 'guice-multibindings')
-exclude(module: 'xbean-bundleutils')
-exclude(module: 'commons-math')
-exclude(module: 'netflix-infix')
-exclude(module: 'joda-time')
-exclude(module: 'commons-jxpath')
-exclude(module: 'antlr-runtime')
-exclude(module: 'stringtemplate')
-exclude(module: 'antlr')
-exclude(module: 'gson')
-exclude(module: 'annotations')
-exclude(module: 'dagger')
-exclude(module: 'blitz4j')
-exclude(module: 'hibernate-validator')
-    }
-    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:'1.3.5.RELEASE') {
-exclude(module: 'commons-logging')
-    }
-    compile group: 'org.springframework', name: 'spring-web', version:'4.2.6.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zuul', version:'1.1.0.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.3.5.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version:'1.0.0.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version:'1.0.0.RELEASE'
+    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework:spring-web")
+    compile("org.springframework.cloud:spring-cloud-starter-zuul")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+    //compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version:'1.0.0.RELEASE'
 }
