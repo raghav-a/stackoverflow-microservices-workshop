@@ -11,36 +11,44 @@ buildscript {
 
         dependencies {
             classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+            classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "io.spring.dependency-management"
+
+    ext {
+        springBootVersion = "1.5.9.RELEASE"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
         }
     }
 
-    subprojects {
-        apply plugin: 'java'
-        apply plugin: 'idea'
-
-        ext {
-            springBootVersion = "1.5.9.RELEASE"
-        }
-
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-
-        tasks.withType(JavaCompile) {
-            options.encoding = 'UTF-8'
-        }
-
-        repositories {
-            mavenCentral()
-        }
-
-        dependencies {
-            compile("com.google.guava:guava:23.5-jre")
-        }
+    dependencies {
+        compile("com.google.guava:guava:23.5-jre")
     }
+}
 
-    configure(subprojects - project(':commons')) {
-        dependencies {
-            compile project(':commons')
-        }
+configure(subprojects - project(':commons')) {
+    dependencies {
+        compile project(':commons')
     }
 }
