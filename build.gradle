@@ -6,30 +6,35 @@ allprojects  {
 }
 
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
-    }
-}
-
-subprojects {
-  apply plugin: 'java'
-  apply plugin: 'idea'
-
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
-
-  tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-  }
-
   repositories {
     mavenCentral()
+
+    dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
   }
 
-  dependencies {
-    testCompile("junit:junit")
+  subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    ext {
+      springBootVersion = "1.5.9.RELEASE"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+      options.encoding = 'UTF-8'
+    }
+
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      compile("com.google.guava:guava:23.5-jre")
+    }
   }
 }

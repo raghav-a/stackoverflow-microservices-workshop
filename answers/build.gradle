@@ -1,7 +1,6 @@
 description = 'answers service'
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE")
-    compile("com.google.guava:guava:23.5-jre")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
