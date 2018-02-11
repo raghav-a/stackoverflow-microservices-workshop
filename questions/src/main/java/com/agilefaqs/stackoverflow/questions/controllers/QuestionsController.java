@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("questions")
 public class QuestionsController {
@@ -16,7 +18,7 @@ public class QuestionsController {
     QuestionsService questionsService;
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
-    public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
+    public @ResponseBody  Question get(@PathVariable("questionId") String questionId, Principal principal) {
         return questionsService.get(questionId);
     }
 

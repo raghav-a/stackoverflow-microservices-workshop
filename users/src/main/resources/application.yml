@@ -1,0 +1,17 @@
+server:
+  port: 8099
+  contextPath: /uaa
+spring:
+  application:
+    name: agilefaqs-user-service
+
+security:
+  oauth2:
+    client:
+      authorized-grant-types: authorization_code,refresh_token,password
+      clientId: agilefaqs
+      clientSecret: agilefaqssecret
+      scope: openid
+  user:
+    name: hari
+    password: password
