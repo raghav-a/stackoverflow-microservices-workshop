@@ -1,0 +1,64 @@
+package com.agilefaqs.stackoverflow.answers.dao;
+
+import com.agilefaqs.stackoverflow.answers.model.Answer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import com.google.common.collect.Lists;
+
+
+public class HashMapAnswersDao implements AnswersDao {
+    private Map<String, Answer> answers = new HashMap<>();
+
+    public HashMapAnswersDao() {
+
+        answers.put("1", new Answer("1", "Java 8 features : lambdas,filters,streams",
+            "1", Lists.newArrayList("java", "lambdas")));
+        answers.put("2", new Answer("2", "Java 8 features : optionals",
+            "1", Lists.newArrayList("java", "lambdas")));
+        answers.put("3", new Answer("3", "Java 8 features : completable futures",
+            "1", Lists.newArrayList("java", "lambdas")));
+
+
+        answers.put("4", new Answer("4", "spring.io, youtube",
+            "2", Lists.newArrayList("spring", "micro-services")));
+        answers.put("5", new Answer("5", "baeldung.com",
+            "2", Lists.newArrayList("spring", "micro-services")));
+
+    }
+
+
+    @Override
+    public void save(Answer answer) {
+        if (answer.getId() != null) {
+            Answer saved = answers.get(answer.getId());
+            if (saved != null) {
+                if (saved.getAnswer() != null)
+                    answer.setAnswer(saved.getAnswer());
+                if (saved.getTags() != null)
+                    answer.setTags(saved.getTags());
+
+            }
+            return;
+        }
+        final String id = answers.keySet().size() + 1 + "";
+        answer.setId(id);
+        answers.put(id, answer);
+    }
+
+    @Override
+    public Answer get(String answerId) {
+        return answers.get(answerId);
+    }
+
+    @Override
+    public List<Answer> getAllAnswersFor(String questionId) {
+        return answers.values()
+            .stream()
+            .filter(answer -> answer.getQuestionId().equals(questionId))
+            .collect(Collectors.toList());
+    }
+}

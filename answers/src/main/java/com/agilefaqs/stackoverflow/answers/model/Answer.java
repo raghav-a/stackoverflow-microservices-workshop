@@ -12,6 +12,9 @@ public class Answer {
     private List<String> tags;
     private Integer votes = 0;
 
+    public Answer(String id, String answer, String questionId, List<String> tags) {
+
+    }
 
 
     public void validate() {
