@@ -13,7 +13,10 @@ public class Answer {
     private Integer votes = 0;
 
     public Answer(String id, String answer, String questionId, List<String> tags) {
-
+        this.id = id;
+        this.answer = answer;
+        this.questionId = questionId;
+        this.tags = tags;
     }
 
 

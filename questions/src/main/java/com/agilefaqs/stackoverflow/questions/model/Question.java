@@ -1,27 +1,28 @@
 package com.agilefaqs.stackoverflow.questions.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 
 import static java.util.Objects.nonNull;
 
 public class Question {
 
-    private String questionId;
+    private String id;
     private String question;
     private List<String> tags;
     private Integer votes = 0;
 
+    public Question(String id, String question, List<String> tags) {
+        this.id = id;
+        this.question = question;
+        this.tags = tags;
+    }
 
 
     public void validate() {
         nonNull(question);
     }
 
-    public String id() {
-        return "questionId";
-    }
 
     public String getQuestion() {
         return question;
@@ -39,12 +40,12 @@ public class Question {
         this.tags = tags;
     }
 
-    public String getQuestionId() {
-        return questionId;
+    public String getId() {
+        return id;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Integer getVotes() {

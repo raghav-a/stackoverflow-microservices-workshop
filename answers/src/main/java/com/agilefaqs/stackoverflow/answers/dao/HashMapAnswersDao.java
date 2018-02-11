@@ -32,21 +32,21 @@ public class HashMapAnswersDao implements AnswersDao {
 
 
     @Override
-    public void save(Answer answer) {
-        if (answer.getId() != null) {
-            Answer saved = answers.get(answer.getId());
+    public void save(Answer input) {
+        if (input.getId() != null) {
+            Answer saved = answers.get(input.getId());
             if (saved != null) {
-                if (saved.getAnswer() != null)
-                    answer.setAnswer(saved.getAnswer());
-                if (saved.getTags() != null)
-                    answer.setTags(saved.getTags());
+                if (input.getAnswer() != null)
+                    saved.setAnswer(input.getAnswer());
+                if (input.getTags() != null)
+                    saved.setTags(input.getTags());
 
             }
             return;
         }
         final String id = answers.keySet().size() + 1 + "";
-        answer.setId(id);
-        answers.put(id, answer);
+        input.setId(id);
+        answers.put(id, input);
     }
 
     @Override

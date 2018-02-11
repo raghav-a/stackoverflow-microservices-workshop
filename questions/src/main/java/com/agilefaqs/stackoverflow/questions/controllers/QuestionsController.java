@@ -40,7 +40,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "/{questionId}/downvote", method = RequestMethod.POST)
     public ResponseEntity<?>  downvote(@PathVariable("questionId") String questionId) {
-        questionsService.upvote(questionId);
+        questionsService.downvote(questionId);
         return ResponseEntity
             .noContent()
             .build();
