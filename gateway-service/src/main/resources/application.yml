@@ -55,6 +55,20 @@ management:
   security:
     enabled: false
 
+auth-config:
+  serviceApiMap:
+    questions:
+      - method: POST
+        url: /api/questions/*
+      - method: POST
+        url: /api/questions/*/upvote
+      - method: POST
+        url: /api/questions/*/upvote
+      - method: PUT
+        url: /api/questions/*
+
+
+
 #security:
 #  oauth2:
 #    client:
