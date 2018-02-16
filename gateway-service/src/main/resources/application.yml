@@ -14,6 +14,9 @@ endpoints:
     sensitive: false
 
 zuul:
+  SendErrorFilter:
+      error:
+        disable: true
   prefix: /api
   routes:
     questions:

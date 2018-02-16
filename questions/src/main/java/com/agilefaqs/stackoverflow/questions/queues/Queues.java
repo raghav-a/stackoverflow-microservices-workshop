@@ -17,6 +17,15 @@ public class Queues {
         return (Channel<T>) new HttpChannelForSearchService(topic);
     }
 
+    public static <T> Channel<T> createEmptyChannelForTopic(String topic) {
+        return new Channel<T>() {
+            @Override
+            public void publish(T data) {
+
+            }
+        };
+    }
+
     public static interface Channel<T> {
         public void publish(T data);
     }

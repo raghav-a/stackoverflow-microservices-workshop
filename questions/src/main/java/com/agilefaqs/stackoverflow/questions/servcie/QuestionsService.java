@@ -17,7 +17,7 @@ public class QuestionsService {
     @Autowired
     public QuestionsService(QuestionsDao questionsDao) {
         postedQuestionsChannel = Queues
-        .createChannelForTopic("Posted_Questions");
+        .createEmptyChannelForTopic("Posted_Questions");
         this.questionsDao = questionsDao;
     }
 

@@ -1,15 +1,25 @@
 package com.agilefaqs.stackoverflow.gateway.config;
 
+import com.agilefaqs.stackoverflow.gateway.filters.AuthenticationFilter;
+import com.google.common.base.Preconditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Component
 @ConfigurationProperties(prefix = "auth-config")
 public class AuthConfig {
+
+    private static Logger log = LoggerFactory.getLogger(AuthConfig.class);
 
     private Map<String, List<Api>> serviceApiMap;
 
@@ -21,15 +31,14 @@ public class AuthConfig {
         this.serviceApiMap = serviceApiMap;
     }
 
-    public boolean needsAuthentication(String url, String method){
-        System.out.println("authentication needed ?? "+url + ":"+method);
+    public boolean needsAuthentication(String url, String method) {
         final String[] tokens = url.split("/");
-        final List<Api> apis = serviceApiMap.get(tokens[2]);
-        for (Api api : apis) {
-            if(api.matches(url, method))
-                return true;
-        }
-        return false;
+        Preconditions.checkArgument(tokens.length >= 3);
+        final Boolean authenticationNeeded = Optional.ofNullable(serviceApiMap.get(tokens[2]))
+            .map(apis -> apis.stream().anyMatch(api -> api.matches(url, method)))
+            .orElse(false);
+        log.info(String.format("authentication needed for %s : %s : %s",url ,method, authenticationNeeded));
+        return authenticationNeeded;
     }
 
     @Override
@@ -67,9 +76,9 @@ public class AuthConfig {
                 '}';
         }
 
-        public boolean matches(String regex, String method) {
+        boolean matches(String regex, String method) {
             final boolean matches = regex.matches(regex);
-            System.out.println("result for regex : "+matches);
+            log.info("result for regex in Api: " + matches);
             return this.method.equals(method) && matches;
         }
     }

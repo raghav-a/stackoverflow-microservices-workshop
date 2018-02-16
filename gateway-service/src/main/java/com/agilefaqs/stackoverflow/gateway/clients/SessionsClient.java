@@ -1,18 +1,36 @@
 package com.agilefaqs.stackoverflow.gateway.clients;
 
+
+import com.agilefaqs.stackoverflow.exceptions.GenericHystrixCommand;
 import com.agilefaqs.stackoverflow.gateway.model.AuthRequest;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
+@Component
+public class SessionsClient {
 
-@FeignClient("sessions-service")
-public interface SessionsClient {
+    private SessionsFeignClient sessionsFeignClient;
+    private Map<AuthRequest, Boolean> sessionsTokens = new ConcurrentHashMap<>();
 
-        @RequestMapping(method = RequestMethod.POST, value = "/sessions/validateToken")
-        Boolean validateToken(@RequestBody AuthRequest token);
+    @Autowired
+    public SessionsClient(SessionsFeignClient sessionsFeignClient) {
+        this.sessionsFeignClient = sessionsFeignClient;
+    }
 
-
-
+    public Boolean validateToken(AuthRequest authRequest) {
+        return GenericHystrixCommand.execute(
+                "gateway.auth",
+                 "sessions.validate",
+            () -> {
+                final Boolean isValid = sessionsFeignClient.validateToken(authRequest);
+                sessionsTokens.put(authRequest, isValid);
+                return isValid;
+            },
+            e -> sessionsTokens.get(authRequest)
+        );
+    }
 }

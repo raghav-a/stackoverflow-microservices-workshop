@@ -44,6 +44,7 @@ subprojects {
 
     dependencies {
         compile("com.google.guava:guava:23.5-jre")
+        compile("org.springframework.boot:spring-boot-starter-cache")
     }
 }
 
