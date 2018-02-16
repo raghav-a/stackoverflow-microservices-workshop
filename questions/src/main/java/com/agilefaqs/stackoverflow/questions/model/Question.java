@@ -12,6 +12,9 @@ public class Question {
     private List<String> tags;
     private Integer votes = 0;
 
+    public Question() {
+    }
+
     public Question(String id, String question, List<String> tags) {
         this.id = id;
         this.question = question;

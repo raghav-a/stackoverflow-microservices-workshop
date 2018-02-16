@@ -1,7 +1,7 @@
-package com.agilefaqs.stackoverflow.answers;
+package com.agilefaqs.stackoverflow.sessions;
 
-import com.agilefaqs.stackoverflow.answers.dao.AnswersDao;
-import com.agilefaqs.stackoverflow.answers.dao.HashMapAnswersDao;
+import com.agilefaqs.stackoverflow.sessions.dao.HashMapQuestionsDao;
+import com.agilefaqs.stackoverflow.sessions.dao.SessionsDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -9,10 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
+
 @EnableEurekaClient
-public class AnswersApplication {
+public class SessionsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AnswersApplication.class);
+        SpringApplication.run(SessionsApplication.class);
     }
 
 
@@ -20,8 +21,8 @@ public class AnswersApplication {
     public static class Config{
 
         @Bean
-        public AnswersDao dao(){
-            return new HashMapAnswersDao();
+        public SessionsDao dao(){
+            return new HashMapQuestionsDao();
         }
     }
 }

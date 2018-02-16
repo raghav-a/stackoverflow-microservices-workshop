@@ -1,7 +1,9 @@
 package com.agilefaqs.stackoverflow.questions.dao;
 
 import com.agilefaqs.stackoverflow.questions.model.Question;
+import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.google.common.collect.Lists;
+import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,8 @@ public class HashMapQuestionsDao implements QuestionsDao {
                     saved.setTags(input.getTags());
 
             }
+            else
+                throw new ApplicationException("Qeustion not found", HttpStatus.NOT_FOUND);
             return;
         }
         final String id = questions.keySet().size() + 1 + "";

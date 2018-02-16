@@ -18,7 +18,7 @@ public class QuestionsController {
     QuestionsService questionsService;
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
-    public @ResponseBody  Question get(@PathVariable("questionId") String questionId, Principal principal) {
+    public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
         return questionsService.get(questionId);
     }
 
