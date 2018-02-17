@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 @Component
 public class UsersService {
 
@@ -27,11 +23,11 @@ public class UsersService {
 
 
     public String addNew(User input) {
-        if(usersDao.get(input.getUserId())!=null) {
-            final String userId = generateId(input.getUserId());
-            input.setUserId(userId);
-            usersDao.save(input);
+        final User existingUser = usersDao.get(input.getUserId());
+        if(existingUser !=null) {
+            input.setUserId(generateAnotherId(input.getUserId()));
         }
+        usersDao.save(input);
         return input.getUserId();
     }
 
@@ -42,7 +38,7 @@ public class UsersService {
         return user;
     }
 
-    private String generateId(String userId) {
+    private String generateAnotherId(String userId) {
         return userId+usersDao.getNumberOfUsers()+1;
     }
 

@@ -32,7 +32,7 @@ public class UsersController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public @ResponseBody
     User get(@PathVariable("userId") String userId) {
-        log.info("user fetch request for : "+userId);
+        log.info("User fetch request for : "+userId);
         return usersService.get(userId);
     }
 

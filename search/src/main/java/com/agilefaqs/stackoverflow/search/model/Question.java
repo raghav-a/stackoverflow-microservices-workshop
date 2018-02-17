@@ -37,7 +37,19 @@ public class Question {
     }
 
     private String questionId;
+
     private String question;
+
     private String userName;
     private List<String> tags;
+
+    @Override
+    public String toString() {
+        return "Question{" +
+            "questionId='" + questionId + '\'' +
+            ", question='" + question + '\'' +
+            ", userName='" + userName + '\'' +
+            ", tags=" + tags +
+            '}';
+    }
 }
