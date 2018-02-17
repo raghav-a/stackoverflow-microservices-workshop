@@ -1,4 +1,21 @@
-server:
-  port: ${PORT:3333}
-  host: localhost
+spring:
+    application:
+        name: search-service
 
+server:
+    port: 8093
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: true
+
+
+security:
+  basic:
+    enable: false
+
+management:
+  security:
+    enabled: false

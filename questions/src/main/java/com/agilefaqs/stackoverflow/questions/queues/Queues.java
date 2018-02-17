@@ -8,13 +8,30 @@ import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Component
 public class Queues {
 
+    @Autowired
+    private SearchServiceFeignClient searchServiceFeignClient;
 
-    public static <T> Channel<T> createChannelForTopic(String topic) {
-        return (Channel<T>) new HttpChannelForSearchService(topic);
+    private static Logger log = LoggerFactory.getLogger(Queues.class);
+
+
+    public  <T> Channel<T> createChannelForTopic(String topic) {
+        return (Channel<T>) new HttpChannelForSearchService(topic, searchServiceFeignClient);
     }
 
     public static <T> Channel<T> createEmptyChannelForTopic(String topic) {
@@ -35,36 +52,30 @@ public class Queues {
     private static class HttpChannelForSearchService implements Channel<Question> {
         private String topic;
 
-        SearchServiceClient searchServiceClient;
+        private SearchServiceFeignClient searchServiceFeignClient;
+        private Executor executor = Executors.newSingleThreadExecutor();
 
-        public HttpChannelForSearchService(String topic) {
-
-
-            searchServiceClient = Feign.builder()
-                .client(new OkHttpClient())
-                .encoder(new GsonEncoder())
-                .decoder(new GsonDecoder())
-               // .logger(new Slf4jLogger(SearchServiceClient.class))
-                //.logLevel(feign.Logger.Level.FULL)
-                .target(SearchServiceClient.class, "http://localhost:3333/search");
-
-
+        public HttpChannelForSearchService(String topic, SearchServiceFeignClient searchServiceFeignClient) {
+            this.searchServiceFeignClient = searchServiceFeignClient;
             this.topic = topic;
         }
 
         @Override
         public void publish(Question data) {
-
-            System.out.printf("Publishing data to search service");
-            searchServiceClient.postQuestion(data);
+            log.info(String.format("Publishing data to search service : %s",data));
+            executor.execute(() -> searchServiceFeignClient.postQuestion(data));
 
         }
     }
 
-    private interface SearchServiceClient {
 
-        @RequestLine("POST /onQuestionsPosts")
-        @Headers("Content-Type: application/json")
-        void postQuestion(Question book);
+
+
+    @FeignClient("search-service")
+    public interface SearchServiceFeignClient {
+
+        @RequestMapping(method = RequestMethod.POST, value = "/search/onQuestionsPosts")
+        Boolean postQuestion(@RequestBody Question question);
+
     }
 }

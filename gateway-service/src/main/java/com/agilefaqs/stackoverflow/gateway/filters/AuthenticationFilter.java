@@ -26,13 +26,13 @@ public class AuthenticationFilter extends ZuulFilter {
 
     private AuthConfig authConfig;
 
+    private static Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
+
     public AuthenticationFilter(SessionsClient sessionsClient, AuthConfig authConfig) {
         this.sessionsClient = sessionsClient;
         this.authConfig = authConfig;
         log.info("service api auth configuration :" + authConfig);
     }
-
-    private static Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
 
 
     @Override

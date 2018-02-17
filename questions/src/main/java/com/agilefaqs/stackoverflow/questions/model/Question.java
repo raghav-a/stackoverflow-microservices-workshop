@@ -66,4 +66,21 @@ public class Question {
     public void downvote() {
         votes--;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+            "id='" + id + '\'' +
+            ", question='" + question + '\'' +
+            ", tags=" + tags +
+            ", votes=" + votes +
+            '}';
+    }
+
+    public void update(Question input) {
+        if (input.getQuestion() != null)
+            setQuestion(input.getQuestion());
+        if (input.getTags() != null)
+            setTags(input.getTags());
+    }
 }

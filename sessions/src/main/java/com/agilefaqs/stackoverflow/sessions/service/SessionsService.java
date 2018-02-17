@@ -1,7 +1,6 @@
-package com.agilefaqs.stackoverflow.sessions.servcie;
+package com.agilefaqs.stackoverflow.sessions.service;
 
 import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
-import com.agilefaqs.stackoverflow.sessions.controllers.SessionsController;
 import com.agilefaqs.stackoverflow.sessions.dao.SessionsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

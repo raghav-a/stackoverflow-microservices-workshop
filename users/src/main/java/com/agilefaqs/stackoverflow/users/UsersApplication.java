@@ -1,24 +1,28 @@
 package com.agilefaqs.stackoverflow.users;
 
-import java.security.Principal;
-
+import com.agilefaqs.stackoverflow.users.dao.HashMapUsersDao;
+import com.agilefaqs.stackoverflow.users.dao.UsersDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@RestController
-//@EnableResourceServer
-//@EnableAuthorizationServer
 @SpringBootApplication
-public class UsersApplication {
 
-    @RequestMapping("/user")
-    public Principal user(Principal user) {
-        return user;
+@EnableEurekaClient
+public class UsersApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(UsersApplication.class);
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(UsersApplication.class, args);
+
+    @Configuration
+    public static class Config{
+
+        @Bean
+        public UsersDao dao(){
+            return new HashMapUsersDao();
+        }
     }
 }

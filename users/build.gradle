@@ -1,6 +1,18 @@
-description = 'Users Service'
+description = 'users service'
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile(group: 'com.netflix.feign', name: 'feign-core', version: '8.18.0')
+    // https://mvnrepository.com/artifact/com.netflix.feign/feign-okhttp
+    compile(group: 'com.netflix.feign', name: 'feign-okhttp', version: '8.18.0')
+    // https://mvnrepository.com/artifact/io.github.openfeign/feign-gson
+    compile(group: 'io.github.openfeign', name: 'feign-gson', version: '9.5.1')
+    // https://mvnrepository.com/artifact/io.github.openfeign/feign-slf4j
+    compile(group: 'io.github.openfeign', name: 'feign-slf4j', version: '9.5.1')
+
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }

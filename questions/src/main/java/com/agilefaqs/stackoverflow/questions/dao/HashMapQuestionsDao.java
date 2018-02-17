@@ -14,7 +14,7 @@ public class HashMapQuestionsDao implements QuestionsDao {
 
     public HashMapQuestionsDao() {
         questions.put("1", new Question("1", "what are the new features in java 8", Lists.newArrayList("java")));
-        questions.put("2", new Question("2", "Suggest some good sites for leaning spring boot", Lists.newArrayList("spring", "microservices")));
+        questions.put("2", new Question("2", "Can anyone share some good sites for leaning spring boot", Lists.newArrayList("spring", "microservices")));
     }
 
 
@@ -28,19 +28,18 @@ public class HashMapQuestionsDao implements QuestionsDao {
         if (input.getId() != null) {
             Question saved = questions.get(input.getId());
             if (saved != null) {
-                if (input.getQuestion() != null)
-                    saved.setQuestion(input.getQuestion());
-                if (input.getTags() != null)
-                    saved.setTags(input.getTags());
-
+                saved.update(input);
             }
             else
-                throw new ApplicationException("Qeustion not found", HttpStatus.NOT_FOUND);
+                throw new ApplicationException("Question not found", HttpStatus.NOT_FOUND);
             return;
         }
-        final String id = questions.keySet().size() + 1 + "";
-        input.setId(id);
-        questions.put(id, input);
+        input.setId(generateID());
+        questions.put(input.getId(), input);
 
+    }
+
+    private String generateID() {
+        return String.valueOf(questions.keySet().size() + 1);
     }
 }

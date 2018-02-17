@@ -15,8 +15,12 @@ import java.util.stream.Collectors;
 @Component
 public class AnswersService {
 
-    @Autowired
     private AnswersDao answersDao;
+
+    @Autowired
+    public AnswersService(AnswersDao answersDao) {
+        this.answersDao = answersDao;
+    }
 
     public Answer get(String answerId) {
         return answersDao.get(answerId);

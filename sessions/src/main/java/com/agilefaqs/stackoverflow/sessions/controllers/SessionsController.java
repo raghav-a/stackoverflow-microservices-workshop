@@ -2,7 +2,7 @@ package com.agilefaqs.stackoverflow.sessions.controllers;
 
 import com.agilefaqs.stackoverflow.sessions.model.AuthRequest;
 import com.agilefaqs.stackoverflow.sessions.model.LoginRequest;
-import com.agilefaqs.stackoverflow.sessions.servcie.SessionsService;
+import com.agilefaqs.stackoverflow.sessions.service.SessionsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

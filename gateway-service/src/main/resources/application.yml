@@ -27,10 +27,18 @@ zuul:
           path: /answers/**
           serviceId: answers-service
           stripPrefix: false
+    search:
+          path: /search/**
+          serviceId: search-service
+          stripPrefix: false
+    users:
+          path: /users/**
+          serviceId: users-service
+          stripPrefix: false
     sessions:
-              path: /sessions/**
-              serviceId: sessions-service
-              stripPrefix: false
+          path: /sessions/**
+          serviceId: sessions-service
+          stripPrefix: false
 
 ribbon:
   eureka:
@@ -66,9 +74,21 @@ auth-config:
       - method: POST
         url: /api/questions/*/upvote
       - method: POST
-        url: /api/questions/*/upvote
+        url: /api/questions/*/downvote
       - method: PUT
         url: /api/questions/*
+    answers:
+      - method: POST
+        url: /api/answers/*
+      - method: POST
+        url: /api/answers/*/upvote
+      - method: POST
+        url: /api/answers/*/downvote
+      - method: PUT
+        url: /api/answers/*
+    users:
+      - method: GET
+        url: /api/users/*
 
 
 

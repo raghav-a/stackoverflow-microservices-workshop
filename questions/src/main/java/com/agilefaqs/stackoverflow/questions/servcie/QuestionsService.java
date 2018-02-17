@@ -11,13 +11,12 @@ import org.springframework.stereotype.Component;
 public class QuestionsService {
 
     private QuestionsDao questionsDao;
-    private Channel<Question> postedQuestionsChannel;
+    private Channel<Question> questionsChannel;
 
 
     @Autowired
-    public QuestionsService(QuestionsDao questionsDao) {
-        postedQuestionsChannel = Queues
-        .createEmptyChannelForTopic("Posted_Questions");
+    public QuestionsService(QuestionsDao questionsDao, Queues queues) {
+        questionsChannel = queues.createChannelForTopic("Posted_Questions");
         this.questionsDao = questionsDao;
     }
 
@@ -29,14 +28,14 @@ public class QuestionsService {
     public String save(Question question) {
         System.out.println("Saving question");
         questionsDao.save(question);
-        postedQuestionsChannel.publish(question);
+        questionsChannel.publish(question);
         return question.getId();
     }
 
     public void update(String questionId, Question input) {
         input.setId(questionId);
         questionsDao.save(input);
-        postedQuestionsChannel.publish(input);
+        questionsChannel.publish(input);
     }
 
     public void upvote(String questionId) {
