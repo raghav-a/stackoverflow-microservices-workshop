@@ -2,6 +2,8 @@ package com.agilefaqs.stackoverflow.questions.controllers;
 
 import com.agilefaqs.stackoverflow.questions.model.Question;
 import com.agilefaqs.stackoverflow.questions.servcie.QuestionsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,10 @@ import java.security.Principal;
 @RequestMapping("questions")
 public class QuestionsController {
 
+    private static Logger log = LoggerFactory.getLogger(QuestionsController.class);
 
     @Autowired
-    QuestionsService questionsService;
+    private QuestionsService questionsService;
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
     public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
@@ -28,6 +31,18 @@ public class QuestionsController {
         return ResponseEntity
             .noContent()
             .build();
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    ResponseEntity<?> add(@RequestBody Question input, @RequestHeader("X-USER-ID") String userId) {
+        log.info(String.format("Save Question Called by %s : %s",userId, input));
+        input.validate();
+        String id = questionsService.save(input);
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body("{\"questionId\":\""+id+"\"}");
+
 
     }
 
@@ -46,17 +61,6 @@ public class QuestionsController {
         return ResponseEntity
             .noContent()
             .build();
-
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody Question input) {
-        input.validate();
-        String id = questionsService.save(input);
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body("{\"questionId\":\""+id+"\"}");
-
 
     }
 

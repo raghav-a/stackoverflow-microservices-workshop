@@ -1,5 +1,6 @@
 package com.agilefaqs.stackoverflow.sessions.controllers;
 
+import com.agilefaqs.stackoverflow.sessions.clients.UserDetail;
 import com.agilefaqs.stackoverflow.sessions.model.AuthRequest;
 import com.agilefaqs.stackoverflow.sessions.model.LoginRequest;
 import com.agilefaqs.stackoverflow.sessions.service.SessionsService;
@@ -18,15 +19,16 @@ public class SessionsController {
     SessionsService sessionsService;
 
     @RequestMapping(value = "/validateToken", method = RequestMethod.POST)
-    public Boolean validateToken(@RequestBody AuthRequest authRequest) {
+    public UserDetail validateToken(@RequestBody AuthRequest authRequest) {
         log.info("AuthRequest received : "+authRequest.toString());
-        final Boolean response = sessionsService.validateToken(authRequest.getUserId(), authRequest.getToken());
+        final UserDetail response = sessionsService.validateToken(authRequest.getToken());
         log.info("Validate token response is : "+response);
         return response;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("login");
         log.info("LoginRequest received : "+loginRequest);
         return sessionsService.login(loginRequest.getUserId(), loginRequest.getPassword());
     }

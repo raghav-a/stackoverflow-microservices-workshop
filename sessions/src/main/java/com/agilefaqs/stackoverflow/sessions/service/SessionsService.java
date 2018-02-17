@@ -1,6 +1,8 @@
 package com.agilefaqs.stackoverflow.sessions.service;
 
 import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
+import com.agilefaqs.stackoverflow.sessions.clients.UserDetail;
+import com.agilefaqs.stackoverflow.sessions.clients.UsersClient;
 import com.agilefaqs.stackoverflow.sessions.dao.SessionsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,51 +20,49 @@ public class SessionsService {
     private static Logger log = LoggerFactory.getLogger(SessionsService.class);
 
     private SessionsDao sessionsDao;
+    private UsersClient usersClient;
 
-    private Map<String, String> userIdPasswordMap = new HashMap<>();
-    private Map<String, String> userIdTokenMap = new HashMap<>();
+    //private Map<String, String> userIdPasswordMap = new HashMap<>();
+    private Map<String, UserDetail> userIdTokenMap = new HashMap<>();
 
 
     @Autowired
-    public SessionsService(SessionsDao sessionsDao) {
+    public SessionsService(SessionsDao sessionsDao, UsersClient usersClient) {
         this.sessionsDao = sessionsDao;
-        userIdPasswordMap.put("raghav", "qwedsa");
-        userIdPasswordMap.put("hari", "qwedsa");
-        userIdPasswordMap.put("naresh", "qwedsa");
+        this.usersClient = usersClient;
+        //userIdPasswordMap.put("raghav", "qwedsa");
+        //userIdPasswordMap.put("hari", "qwedsa");
+        //userIdPasswordMap.put("naresh", "qwedsa");
     }
 
 
     public String login(String userId, String password) {
-        final String savedPassword = userIdPasswordMap.get(userId);
-        if(savedPassword==null)
+        final UserDetail userDetails = usersClient.getUserDetails(userId);
+        if(userDetails==null)
         {
             throw new ApplicationException("User Id Incorrect", HttpStatus.NOT_FOUND);
         }
-        if(!savedPassword.equals(password))
+        if(!userDetails.getPassword().equals(password))
         {
             throw new ApplicationException("Password Incorrect", HttpStatus.BAD_REQUEST);
         }
-        return generateToken(userId);
+        return generateToken(userId, userDetails);
     }
 
-    private String generateToken(String userId) {
+    private String generateToken(String userId, UserDetail userDetails) {
         final String token = UUID.randomUUID().toString();
-        userIdTokenMap.put(userId, token);
+        userIdTokenMap.put(token, userDetails);
         return token;
     }
 
-    public Boolean validateToken(String userId, String token) {
-        final String savedToken = userIdTokenMap.get(userId);
-        log.info(String.format("Token for %s is %s", userId, savedToken));
-        if(savedToken==null)
+    public UserDetail validateToken(String token) {
+        final UserDetail userDetail = userIdTokenMap.get(token);
+        if(userDetail==null)
         {
-            throw new ApplicationException("Token not found", HttpStatus.NOT_FOUND);
-        }
-        if(!savedToken.equals(token))
-        {
-            throw new ApplicationException("Token Incorrect", HttpStatus.BAD_REQUEST);
+            throw new ApplicationException("Token incorrect/Not-found", HttpStatus.NOT_FOUND);
         }
 
-        return true;
+        log.info(String.format("Token for %s is %s", userDetail.getUserId(), userDetail));
+        return userDetail;
     }
 }

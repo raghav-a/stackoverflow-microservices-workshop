@@ -14,23 +14,23 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SessionsClient {
 
     private SessionsFeignClient sessionsFeignClient;
-    private Map<AuthRequest, Boolean> sessionsTokens = new ConcurrentHashMap<>();
+    private Map<String, UserDetail> sessionsTokens = new ConcurrentHashMap<>();
 
     @Autowired
     public SessionsClient(SessionsFeignClient sessionsFeignClient) {
         this.sessionsFeignClient = sessionsFeignClient;
     }
 
-    public Boolean validateToken(AuthRequest authRequest) {
+    public UserDetail validateToken(AuthRequest authRequest) {
         return GenericHystrixCommand.execute(
                 "gateway.auth",
                  "sessions.validate",
             () -> {
-                final Boolean isValid = sessionsFeignClient.validateToken(authRequest);
-                sessionsTokens.put(authRequest, isValid);
+                final UserDetail isValid = sessionsFeignClient.validateToken(authRequest);
+                sessionsTokens.put(authRequest.getToken(), isValid);
                 return isValid;
             },
-            e -> sessionsTokens.get(authRequest)
+            e -> sessionsTokens.get(authRequest.getToken())
         );
     }
 }

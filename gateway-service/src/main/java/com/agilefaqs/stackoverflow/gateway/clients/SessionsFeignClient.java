@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public interface SessionsFeignClient {
 
         @RequestMapping(method = RequestMethod.POST, value = "/sessions/validateToken")
-        Boolean validateToken(@RequestBody AuthRequest token);
+        UserDetail validateToken(@RequestBody AuthRequest token);
 
 
 

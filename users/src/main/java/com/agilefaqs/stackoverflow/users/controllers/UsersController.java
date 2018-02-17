@@ -20,6 +20,7 @@ public class UsersController {
 
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<?> add(@RequestBody User input) {
+        log.info("user save request : "+input);
         String id = usersService.addNew(input);
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -31,6 +32,7 @@ public class UsersController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public @ResponseBody
     User get(@PathVariable("userId") String userId) {
+        log.info("user fetch request for : "+userId);
         return usersService.get(userId);
     }
 

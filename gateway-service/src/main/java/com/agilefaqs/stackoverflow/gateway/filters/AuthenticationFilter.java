@@ -3,9 +3,11 @@ package com.agilefaqs.stackoverflow.gateway.filters;
 import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.agilefaqs.stackoverflow.gateway.clients.SessionsClient;
 import com.agilefaqs.stackoverflow.gateway.clients.SessionsFeignClient;
+import com.agilefaqs.stackoverflow.gateway.clients.UserDetail;
 import com.agilefaqs.stackoverflow.gateway.config.AuthConfig;
 import com.agilefaqs.stackoverflow.gateway.model.AuthRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Preconditions;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -58,18 +60,14 @@ public class AuthenticationFilter extends ZuulFilter {
         try {
             HttpServletRequest request = ctx.getRequest();
             log.info("request uri : " + request.getRequestURI());
-            final AuthRequest authRequest = new AuthRequest(
-                request.getHeader("userId"),
-                request.getHeader("token"));
+            final String token = request.getHeader("token");
+            final AuthRequest authRequest = new AuthRequest(token);
             if (authConfig.needsAuthentication(request.getRequestURI(), request.getMethod())) {
-                Boolean isValid = sessionsClient.validateToken(authRequest);
-                if(!isValid){
-                    ctx.getResponse().setStatus(HttpStatus.FORBIDDEN.value());
-                    ctx.setResponseBody("Token Authentication Failed.");
-
-                }
+                UserDetail userDetail = sessionsClient.validateToken(authRequest);
                 log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
-                log.info(String.format("Is response valid : %s", isValid));
+                log.info(String.format("Is response valid : %s", userDetail!=null));
+                Preconditions.checkNotNull(userDetail);
+                ctx.addZuulRequestHeader("X-USER-ID", userDetail.getUserId());
             }
 
         } catch (RuntimeException e) {
