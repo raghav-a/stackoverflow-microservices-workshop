@@ -3,7 +3,7 @@ spring:
         name: search-service
 
 server:
-    port: 8093
+    port: ${port:8093}
 
 eureka:
   client:

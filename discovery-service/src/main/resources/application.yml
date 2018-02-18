@@ -6,7 +6,7 @@ spring:
     name: eureka-discovery-service
 
 server:
-  port: ${PORT:8761}
+  port: ${port:8761}
   tomcat.max-threads: 100
     
 eureka:

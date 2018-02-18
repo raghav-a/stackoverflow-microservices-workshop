@@ -68,6 +68,8 @@ public class AuthenticationFilter extends ZuulFilter {
                 log.info(String.format("Is response valid : %s", userDetail!=null));
                 Preconditions.checkNotNull(userDetail);
                 ctx.addZuulRequestHeader("X-USER-ID", userDetail.getUserId());
+                request.getUserPrincipal();
+
             }
 
         } catch (RuntimeException e) {
@@ -76,7 +78,6 @@ public class AuthenticationFilter extends ZuulFilter {
             ctx.getResponse().setStatus(HttpStatus.FORBIDDEN.value());
             ctx.setResponseBody("Token Authentication Failed.");
             throw new ApplicationException("Token Authentication Failed",HttpStatus.FORBIDDEN);
-            //throw new ZuulException("Token Authentication Failed",HttpStatus.FORBIDDEN.value(),"Token Authentication Failed");
         }
 
         return null;

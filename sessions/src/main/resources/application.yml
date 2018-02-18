@@ -3,7 +3,7 @@ spring:
         name: sessions-service
 
 server:
-    port: 8094
+    port: ${port:8094}
 
 eureka:
   client:

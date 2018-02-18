@@ -3,7 +3,7 @@ spring:
         name: answers-service
 
 server:
-    port: 8092
+    port: ${port:8092}
 
 eureka:
   client:

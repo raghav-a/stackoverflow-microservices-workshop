@@ -3,7 +3,7 @@ spring:
         name: users-service
 
 server:
-    port: 8095
+    port: ${port:8095}
 
 eureka:
   client:

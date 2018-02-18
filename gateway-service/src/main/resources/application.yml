@@ -51,7 +51,7 @@ eureka:
     registerWithEureka: true
       
 server:
-  port: 8765
+  port: ${port:8765}
 
 logging:
   level:
