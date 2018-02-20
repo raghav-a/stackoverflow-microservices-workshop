@@ -2,12 +2,12 @@ package com.agilefaqs.stackoverflow.answers.dao;
 
 import com.agilefaqs.stackoverflow.answers.model.Answer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.google.common.collect.Lists;
+import org.springframework.http.HttpStatus;
 
 
 public class HashMapAnswersDao implements AnswersDao {
@@ -51,7 +51,9 @@ public class HashMapAnswersDao implements AnswersDao {
 
     @Override
     public Answer get(String answerId) {
-        return answers.get(answerId);
+        return Optional.ofNullable(answers.get(answerId))
+            .orElseThrow(() ->
+                new ApplicationException("Answer not found", HttpStatus.NOT_FOUND));
     }
 
     @Override

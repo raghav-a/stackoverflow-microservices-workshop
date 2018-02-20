@@ -1,6 +1,5 @@
 package com.agilefaqs.stackoverflow.questions.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -9,30 +8,32 @@ public class Question {
 
     private String id;
     private String question;
+    private String title;
     private List<String> tags;
     private Integer votes = 0;
 
     public Question() {
     }
 
-    public Question(String id, String question, List<String> tags) {
+    public Question(String id, String title, String question,List<String> tags) {
         this.id = id;
         this.question = question;
+        this.title = title;
         this.tags = tags;
     }
 
 
     public void validate() {
-        nonNull(question);
+        nonNull(title);
     }
 
 
-    public String getQuestion() {
-        return question;
+    public String getTitle() {
+        return title;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<String> getTags() {
@@ -72,15 +73,26 @@ public class Question {
         return "Question{" +
             "id='" + id + '\'' +
             ", question='" + question + '\'' +
+            ", title='" + title + '\'' +
             ", tags=" + tags +
             ", votes=" + votes +
             '}';
     }
 
     public void update(Question input) {
+        if (input.getTitle() != null)
+            setTitle(input.getTitle());
         if (input.getQuestion() != null)
             setQuestion(input.getQuestion());
         if (input.getTags() != null)
             setTags(input.getTags());
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

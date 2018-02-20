@@ -2,6 +2,7 @@ package com.agilefaqs.stackoverflow.answers;
 
 import com.agilefaqs.stackoverflow.answers.dao.AnswersDao;
 import com.agilefaqs.stackoverflow.answers.dao.HashMapAnswersDao;
+import com.agilefaqs.stackoverflow.exceptions.ControllerExceptionAdvice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -22,6 +23,11 @@ public class AnswersApplication {
         @Bean
         public AnswersDao dao(){
             return new HashMapAnswersDao();
+        }
+
+        @Bean
+        public ControllerExceptionAdvice controllerAdvice(){
+            return new ControllerExceptionAdvice();
         }
     }
 }

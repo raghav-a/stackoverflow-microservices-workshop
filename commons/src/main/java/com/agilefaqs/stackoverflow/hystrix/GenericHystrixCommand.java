@@ -1,5 +1,6 @@
-package com.agilefaqs.stackoverflow.exceptions;
+package com.agilefaqs.stackoverflow.hystrix;
 
+import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.netflix.hystrix.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

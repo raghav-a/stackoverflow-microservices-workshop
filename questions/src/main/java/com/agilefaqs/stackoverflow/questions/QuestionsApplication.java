@@ -1,5 +1,6 @@
 package com.agilefaqs.stackoverflow.questions;
 
+import com.agilefaqs.stackoverflow.exceptions.ControllerExceptionAdvice;
 import com.agilefaqs.stackoverflow.questions.dao.HashMapQuestionsDao;
 import com.agilefaqs.stackoverflow.questions.dao.QuestionsDao;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,11 @@ public class QuestionsApplication {
         @Bean
         public QuestionsDao dao(){
             return new HashMapQuestionsDao();
+        }
+
+        @Bean
+        public ControllerExceptionAdvice controllerAdvice(){
+            return new ControllerExceptionAdvice();
         }
     }
 }
