@@ -10,6 +10,21 @@ public class Question {
     private String postedBy;
     private List<String> tags;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+
+        Question question = (Question) o;
+
+        return id != null ? id.equals(question.id) : question.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
     public Question() {
     }
 

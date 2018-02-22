@@ -18,7 +18,6 @@ public class ControllerExceptionAdvice {
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity handleApplicationException(HttpServletRequest request, ApplicationException ex){
         log.info("ApplicationException Occured:: URL="+request.getRequestURL(), ex);
-
         return ResponseEntity
             .status(ex.getStatus())
             .body(ex.getMessage());
@@ -28,8 +27,6 @@ public class ControllerExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity handleValidationException(HttpServletRequest request, MethodArgumentNotValidException ex){
         log.info("Vaidation Exception Occured:: URL="+request.getRequestURL(), ex);
-
-
         return ResponseEntity
             .status(HttpStatus.UNPROCESSABLE_ENTITY)
             .body(ex.getBindingResult().getAllErrors());

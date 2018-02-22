@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("search")
@@ -35,6 +36,12 @@ public class SearchController {
     public @ResponseBody
     List<Question> getAll(@RequestParam("searchQuery") String searchQuery) {
         return searchService.getAllFor(searchQuery);
+    }
+
+    @RequestMapping(value = "/getAllForTag", method = RequestMethod.GET)
+    public @ResponseBody
+    Set<Question> getAllForTag(@RequestParam("tag") String tag) {
+        return searchService.getAllForTag(tag);
     }
 
 

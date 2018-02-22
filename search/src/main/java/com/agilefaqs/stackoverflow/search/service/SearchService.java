@@ -1,20 +1,26 @@
 package com.agilefaqs.stackoverflow.search.service;
 
 import com.agilefaqs.stackoverflow.search.model.Question;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
+import com.google.common.collect.MapMaker;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class SearchService {
 
-    private final Map<String, Question> idToQuestionMap = new HashMap<>();
-    private List<Question> allData = new ArrayList<>();
+    private final Map<String, Question> idToQuestionMap = new MapMaker().makeMap();
+    private final LoadingCache<String, Set<Question>> tagToQuestionMap = CacheBuilder.newBuilder().build(new CacheLoader<String, Set<Question>>() {
+        @Override
+        public HashSet<Question> load(String key) throws Exception {
+            return new HashSet<>();
+        }
+    });
 
     public SearchService() {
         idToQuestionMap.put("1", new Question("1", "hari",
@@ -26,12 +32,20 @@ public class SearchService {
     }
 
     public void addData(Question input) {
-        allData.add(input);
+        idToQuestionMap.put(input.getId(), input);
+        for (String tag : input.getTags()) {
+            tagToQuestionMap.getUnchecked(tag).add(input);
+        }
+
     }
 
     public List<Question> getAllFor(String searchQuery) {
-        return allData.stream().filter(
+        return idToQuestionMap.values().stream().filter(
             question -> question.getQuestion().contains(searchQuery))
             .collect(Collectors.toList());
+    }
+
+    public Set<Question> getAllForTag(String tag) {
+        return tagToQuestionMap.getUnchecked(tag);
     }
 }
