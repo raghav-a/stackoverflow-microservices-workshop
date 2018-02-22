@@ -1,0 +1,4 @@
+applications:
+- name: eureka-discovery-service
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: build/libs/discovery-service-1.0-SNAPSHOT.jar

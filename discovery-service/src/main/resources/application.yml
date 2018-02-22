@@ -1,13 +1,7 @@
-tomcat:
- server.tomcat.max-threads: 100
-
 spring:
   application:
     name: eureka-discovery-service
 
-server:
-  port: ${port:8761}
-  tomcat.max-threads: 100
     
 eureka:
   client:

@@ -1,0 +1,9 @@
+applications:
+- name: users
+  memory: 500M
+  env:
+    JBP_CONFIG_TOMCAT: "{ tomcat: { arguments: {server.tomcat.max-threads=10} } }"
+    JAVA_OPTS: -DXms=500m -DXmx=500m
+    JBP_CONFIG_OPEN_JDK_JRE: "{ memory_calculator: { class_count: 1000 , stack_threads : 10} }"
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: build/libs/users-1.0-SNAPSHOT.jar
