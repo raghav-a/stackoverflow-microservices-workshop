@@ -11,12 +11,14 @@ public class Question {
     private String title;
     private List<String> tags;
     private Integer votes = 0;
+    private String postedBy;
 
     public Question() {
     }
 
-    public Question(String id, String title, String question,List<String> tags) {
+    public Question(String id, String postedBy, String title, String question,List<String> tags) {
         this.id = id;
+        this.postedBy = postedBy;
         this.question = question;
         this.title = title;
         this.tags = tags;
@@ -94,5 +96,13 @@ public class Question {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public void setPostedBy(String postedBy) {
+        this.postedBy = postedBy;
+    }
+
+    public String getPostedBy() {
+        return postedBy;
     }
 }

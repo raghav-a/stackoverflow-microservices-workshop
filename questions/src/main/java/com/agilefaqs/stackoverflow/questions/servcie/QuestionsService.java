@@ -26,7 +26,6 @@ public class QuestionsService {
     }
 
     public String save(Question question) {
-        System.out.println("Saving question");
         questionsDao.save(question);
         questionsChannel.publish(question);
         return question.getId();

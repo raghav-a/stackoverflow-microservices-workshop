@@ -4,12 +4,29 @@ import java.util.List;
 
 public class Question {
 
-    public String getQuestionId() {
-        return questionId;
+    private String id;
+    private String question;
+    private String title;
+    private String postedBy;
+    private List<String> tags;
+
+    public Question() {
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
+    public Question(String id, String question, String title, String postedBy, List<String> tags) {
+        this.id = id;
+        this.question = question;
+        this.title = title;
+        this.postedBy = postedBy;
+        this.tags = tags;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getQuestion() {
@@ -20,12 +37,20 @@ public class Question {
         this.question = question;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPostedBy() {
+        return postedBy;
+    }
+
+    public void setPostedBy(String postedBy) {
+        this.postedBy = postedBy;
     }
 
     public List<String> getTags() {
@@ -36,19 +61,13 @@ public class Question {
         this.tags = tags;
     }
 
-    private String questionId;
-
-    private String question;
-
-    private String userName;
-    private List<String> tags;
-
     @Override
     public String toString() {
         return "Question{" +
-            "questionId='" + questionId + '\'' +
+            "id='" + id + '\'' +
             ", question='" + question + '\'' +
-            ", userName='" + userName + '\'' +
+            ", title='" + title + '\'' +
+            ", postedBy='" + postedBy + '\'' +
             ", tags=" + tags +
             '}';
     }
