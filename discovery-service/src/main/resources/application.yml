@@ -9,3 +9,4 @@ eureka:
     fetchRegistry: false
   server:
     enableSelfPreservation: true
+    eviction-interval-timer-in-ms: 1000

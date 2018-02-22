@@ -1,4 +1,4 @@
 applications:
-- name: users
+- name: apigateway
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
-  path: build/libs/users-1.0-SNAPSHOT.jar
+  path: build/libs/gateway-service-1.0-SNAPSHOT.jar

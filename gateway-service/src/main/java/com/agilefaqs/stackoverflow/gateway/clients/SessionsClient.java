@@ -1,8 +1,8 @@
 package com.agilefaqs.stackoverflow.gateway.clients;
 
 
-import com.agilefaqs.stackoverflow.exceptions.GenericHystrixCommand;
 import com.agilefaqs.stackoverflow.gateway.model.AuthRequest;
+import com.agilefaqs.stackoverflow.hystrix.GenericHystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

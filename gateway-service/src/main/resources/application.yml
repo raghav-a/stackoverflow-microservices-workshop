@@ -13,10 +13,20 @@ endpoints:
   health:
     sensitive: false
 
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 20000
+
 zuul:
   SendErrorFilter:
       error:
-        disable: true
+        disable: false
   prefix: /api
   routes:
     questions:
@@ -43,11 +53,13 @@ zuul:
 ribbon:
   eureka:
     enabled: true
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://eureka-discovery-service.cfapps.io/eureka/
     registerWithEureka: true
       
 server:
