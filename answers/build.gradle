@@ -17,3 +17,7 @@ dependencies {
     //compile('org.springframework.cloud:spring-cloud-starter-oauth2')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
+
+springBoot {
+    mainClass = "com.agilefaqs.stackoverflow.answers.AnswersApplication"
+}

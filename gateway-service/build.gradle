@@ -20,3 +20,7 @@ dependencies {
 
     //compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version:'1.0.0.RELEASE'
 }
+
+springBoot {
+    mainClass = "com.agilefaqs.stackoverflow.gateway.GatewayApplication"
+}

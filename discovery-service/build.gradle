@@ -3,3 +3,8 @@ description = 'Discovery Service'
 dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
 }
+
+
+springBoot {
+    mainClass = "com.agilefaqs.stackoverflow.eureka.DiscoveryServiceApplication"
+}
