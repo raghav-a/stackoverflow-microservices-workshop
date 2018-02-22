@@ -111,3 +111,9 @@ response - 200 [
       ...
   ]
 ```
+
+
+gradle commands
+
+gradle build
+java -jar build/libs/mymodule-0.0.1-SNAPSHOT.jar

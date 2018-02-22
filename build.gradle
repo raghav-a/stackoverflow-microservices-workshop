@@ -1,5 +1,6 @@
 allprojects  {
     apply plugin: 'maven'
+    apply plugin: 'org.springframework.boot'
 
     group = 'com.agilefaqs.stackoverflow'
     version = '1.0-SNAPSHOT'
@@ -14,7 +15,11 @@ buildscript {
             classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
         }
     }
+
+
 }
+
+
 
 subprojects {
     apply plugin: 'java'
