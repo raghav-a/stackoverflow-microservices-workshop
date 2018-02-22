@@ -1,5 +1,6 @@
 package com.agilefaqs.stackoverflow.questions.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -7,7 +8,9 @@ import static java.util.Objects.nonNull;
 public class Question {
 
     private String id;
+    @NotNull(message = "Question can not be null")
     private String question;
+    @NotNull
     private String title;
     private List<String> tags;
     private Integer votes = 0;

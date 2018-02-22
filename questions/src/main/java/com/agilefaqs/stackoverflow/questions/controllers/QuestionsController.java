@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
@@ -35,7 +35,7 @@ public class QuestionsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody Question input, @RequestHeader("X-USER-ID") String userId) {
+    ResponseEntity<?> add(@RequestBody @Valid Question input, @RequestHeader("X-USER-ID") String userId) {
         log.info(String.format("Save Question Called by %s : %s",userId, input));
         input.setPostedBy(userId);
         input.validate();
