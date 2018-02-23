@@ -1,6 +1,8 @@
 package com.agilefaqs.stackoverflow.answers.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Objects.nonNull;
 
@@ -10,7 +12,7 @@ public class Answer {
     private String answer;
     private String questionId;
     private List<String> tags;
-    private Integer votes = 0;
+    private Map<String,Integer> votes = new HashMap<>();
 
     public Answer(String id, String answer, String questionId, List<String> tags) {
         this.id = id;
@@ -25,7 +27,7 @@ public class Answer {
     }
 
     public String id() {
-        return "questionId";
+        return id;
     }
 
     public String getAnswer() {
@@ -53,19 +55,19 @@ public class Answer {
     }
 
     public Integer getVotes() {
-        return votes;
+        return votes.values().stream().mapToInt(i -> i).sum();
     }
 
-    public void setVotes(Integer votes) {
-        this.votes = votes;
+   // public void setVotes(Integer votes) {
+     //   this.votes = votes;
+    //}
+
+    public void upvote(String userId) {
+        votes.put(userId,1);
     }
 
-    public void upvote() {
-        votes++;
-    }
-
-    public void downvote() {
-        votes--;
+    public void downvote(String userId) {
+        votes.put(userId,-1);
     }
 
     public String getQuestionId() {
