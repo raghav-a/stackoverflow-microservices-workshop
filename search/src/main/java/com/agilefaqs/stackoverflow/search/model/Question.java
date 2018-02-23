@@ -28,7 +28,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String id, String question, String title, String postedBy, List<String> tags) {
+    public Question(String id, String postedBy,String title, String question,  List<String> tags) {
         this.id = id;
         this.question = question;
         this.title = title;

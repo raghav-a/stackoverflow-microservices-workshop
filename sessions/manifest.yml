@@ -2,3 +2,5 @@ applications:
 - name: sessions
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   path: build/libs/sessions-1.0-SNAPSHOT.jar
+  services:
+        - discovery_service

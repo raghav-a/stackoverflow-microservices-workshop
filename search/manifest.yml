@@ -2,3 +2,5 @@ applications:
 - name: searchs
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   path: build/libs/search-1.0-SNAPSHOT.jar
+  services:
+    - discovery_service

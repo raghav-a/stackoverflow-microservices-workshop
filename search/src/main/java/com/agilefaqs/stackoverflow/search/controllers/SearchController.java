@@ -35,12 +35,14 @@ public class SearchController {
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public @ResponseBody
     List<Question> getAll(@RequestParam("searchQuery") String searchQuery) {
+        log.info("Search query received for : "+searchQuery);
         return searchService.getAllFor(searchQuery);
     }
 
     @RequestMapping(value = "/getAllForTag", method = RequestMethod.GET)
     public @ResponseBody
     Set<Question> getAllForTag(@RequestParam("tag") String tag) {
+        log.info("Search query received for tag : "+tag);
         return searchService.getAllForTag(tag);
     }
 

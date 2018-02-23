@@ -5,12 +5,6 @@ spring:
 server:
     port: ${port:8093}
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: https://eureka-discovery-service.cfapps.io/eureka/
-    registerWithEureka: true
-
 
 security:
   basic:
