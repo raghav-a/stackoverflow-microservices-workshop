@@ -1,20 +1,18 @@
 spring:
     application:
         name: answers-service
+    cloud:
+        services:
+          registrationMethod: route
 
 server:
     port: ${port:8092}
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: https://eureka-discovery-service.cfapps.io/eureka/
-    registerWithEureka: true
 
 
 security:
   basic:
     enable: false
+  ignored: /**
 
 management:
   security:

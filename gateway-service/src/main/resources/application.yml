@@ -56,12 +56,7 @@ ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: https://eureka-discovery-service.cfapps.io/eureka/
-    registerWithEureka: true
-      
+
 server:
   port: ${port:8765}
 
@@ -73,6 +68,7 @@ logging:
 security:
   basic:
     enable: false
+  ignored: /**
 
 management:
   security:

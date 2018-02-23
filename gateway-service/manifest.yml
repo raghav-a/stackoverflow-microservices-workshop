@@ -2,3 +2,5 @@ applications:
 - name: apigateway
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   path: build/libs/gateway-service-1.0-SNAPSHOT.jar
+  services:
+    - discovery_service

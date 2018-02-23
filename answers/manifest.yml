@@ -2,3 +2,5 @@ applications:
 - name: answers
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   path: build/libs/answers-1.0-SNAPSHOT.jar
+  services:
+    - discovery_service
