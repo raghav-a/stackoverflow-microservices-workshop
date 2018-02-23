@@ -15,17 +15,17 @@ public class HashMapAnswersDao implements AnswersDao {
 
     public HashMapAnswersDao() {
 
-        answers.put("1", new Answer("1", "Java 8 features : lambdas,filters,streams",
+        answers.put("1", new Answer("1", "naresh", "Java 8 features : lambdas,filters,streams",
             "1", Lists.newArrayList("java", "lambdas")));
-        answers.put("2", new Answer("2", "Java 8 features : optionals",
+        answers.put("2", new Answer("2", "naresh","Java 8 features : optionals",
             "1", Lists.newArrayList("java", "lambdas")));
-        answers.put("3", new Answer("3", "Java 8 features : completable futures",
+        answers.put("3", new Answer("3", "naresh","Java 8 features : completable futures",
             "1", Lists.newArrayList("java", "lambdas")));
 
 
-        answers.put("4", new Answer("4", "spring.io, youtube",
+        answers.put("4", new Answer("4", "hari","spring.io, youtube",
             "2", Lists.newArrayList("spring", "micro-services")));
-        answers.put("5", new Answer("5", "baeldung.com",
+        answers.put("5", new Answer("5", "hari", "baeldung.com",
             "2", Lists.newArrayList("spring", "micro-services")));
 
     }
@@ -36,6 +36,7 @@ public class HashMapAnswersDao implements AnswersDao {
         if (input.getId() != null) {
             Answer saved = answers.get(input.getId());
             if (saved != null) {
+                validateAuthority(input, saved);
                 if (input.getAnswer() != null)
                     saved.setAnswer(input.getAnswer());
                 if (input.getTags() != null)
@@ -47,6 +48,11 @@ public class HashMapAnswersDao implements AnswersDao {
         final String id = answers.keySet().size() + 1 + "";
         input.setId(id);
         answers.put(id, input);
+    }
+
+    private void validateAuthority(Answer input, Answer saved) {
+        if(!saved.getPostedBy().equals(input.getPostedBy()))
+            throw new ApplicationException("Action not allowed for this user.", HttpStatus.FORBIDDEN);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.agilefaqs.stackoverflow.answers.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,23 +9,24 @@ import static java.util.Objects.nonNull;
 
 public class Answer {
 
+
     private String id;
+    @NotNull
     private String answer;
+    @NotNull
     private String questionId;
     private List<String> tags;
     private Map<String,Integer> votes = new HashMap<>();
+    private String postedBy;
 
-    public Answer(String id, String answer, String questionId, List<String> tags) {
+    public Answer(String id, String postedBy, String answer, String questionId, List<String> tags) {
         this.id = id;
+        this.postedBy = postedBy;
         this.answer = answer;
         this.questionId = questionId;
         this.tags = tags;
     }
 
-
-    public void validate() {
-        nonNull(answer);
-    }
 
     public String id() {
         return id;
@@ -76,5 +78,13 @@ public class Answer {
 
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
+    }
+
+    public void setPostedBy(String postedBy) {
+        this.postedBy = postedBy;
+    }
+
+    public String getPostedBy() {
+        return postedBy;
     }
 }
