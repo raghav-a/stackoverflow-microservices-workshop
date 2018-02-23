@@ -4,3 +4,4 @@ applications:
   path: build/libs/gateway-service-1.0-SNAPSHOT.jar
   services:
     - discovery_service
+    - circuit-breaker-dashboard
