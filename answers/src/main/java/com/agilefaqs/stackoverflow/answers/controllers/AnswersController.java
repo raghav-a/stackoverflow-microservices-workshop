@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,11 +16,11 @@ public class AnswersController {
 
 
     @Autowired
-    AnswersService answersService;
+    private AnswersService answersService;
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {
-        input.validate();
+    ResponseEntity<?> add(@Valid @RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {
+        input.setPostedBy(userId);
         String id = answersService.save(input);
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -42,6 +43,7 @@ public class AnswersController {
 
     @RequestMapping(value = "/{answerId}", method = RequestMethod.PUT)
     public ResponseEntity<?>  update(@PathVariable("answerId") String answerId, @RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {
+        input.setPostedBy(userId);
         answersService.update(answerId, input);
         return ResponseEntity
             .noContent()
