@@ -13,6 +13,16 @@ endpoints:
   health:
     sensitive: false
 
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 20000
+
 zuul:
   SendErrorFilter:
       error:

@@ -15,7 +15,7 @@ public class AnswersController {
 
 
     @Autowired
-    AnswersService answersService;
+    private AnswersService answersService;
 
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<?> add(@RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {

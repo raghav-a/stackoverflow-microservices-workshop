@@ -15,6 +15,7 @@ eureka:
 security:
   basic:
     enable: false
+  ignored: /**
 
 management:
   security:
