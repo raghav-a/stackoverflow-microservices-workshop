@@ -18,7 +18,7 @@ public class AnswersController {
     AnswersService answersService;
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@RequestBody Answer input) {
+    ResponseEntity<?> add(@RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {
         input.validate();
         String id = answersService.save(input);
         return ResponseEntity
@@ -41,7 +41,7 @@ public class AnswersController {
     }
 
     @RequestMapping(value = "/{answerId}", method = RequestMethod.PUT)
-    public ResponseEntity<?>  update(@PathVariable("answerId") String answerId, @RequestBody Answer input) {
+    public ResponseEntity<?>  update(@PathVariable("answerId") String answerId, @RequestBody Answer input, @RequestHeader("X-USER-ID") String userId) {
         answersService.update(answerId, input);
         return ResponseEntity
             .noContent()
@@ -50,8 +50,8 @@ public class AnswersController {
     }
 
     @RequestMapping(value = "/{answerId}/upvote", method = RequestMethod.POST)
-    public ResponseEntity<?>  upvote(@PathVariable("answerId") String answerId) {
-        answersService.upvote(answerId);
+    public ResponseEntity<?>  upvote(@PathVariable("answerId") String answerId, @RequestHeader("X-USER-ID") String userId) {
+        answersService.upvote(answerId, userId);
         return ResponseEntity
             .noContent()
             .build();
@@ -59,8 +59,8 @@ public class AnswersController {
     }
 
     @RequestMapping(value = "/{answerId}/downvote", method = RequestMethod.POST)
-    public ResponseEntity<?>  downvote(@PathVariable("answerId") String answerId) {
-        answersService.upvote(answerId);
+    public ResponseEntity<?>  downvote(@PathVariable("answerId") String answerId, @RequestHeader("X-USER-ID") String userId) {
+        answersService.downvote(answerId, userId);
         return ResponseEntity
             .noContent()
             .build();
