@@ -33,7 +33,7 @@ public class QuestionsApiTest {
     }
 
     @Test
-    public void getQuestions() throws Exception {
+    public void fetchQuestionsForValidQuestionIds() throws Exception {
         mockMvc.perform(get("/questions/1"))
             .andExpect(status().isOk());
         mockMvc.perform(get("/questions/2"))
@@ -43,7 +43,7 @@ public class QuestionsApiTest {
     }
 
     @Test
-    public void getInvalidQuestions() throws Exception {
+    public void statusCodeShouldBeNotFoundOnGetQuestionWithInvalidId() throws Exception {
         mockMvc.perform(get("/questions/4"))
             .andExpect(status().isNotFound());
 
