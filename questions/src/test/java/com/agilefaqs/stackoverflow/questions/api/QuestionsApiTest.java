@@ -2,6 +2,7 @@ package com.agilefaqs.stackoverflow.questions.api;
 
 import com.agilefaqs.stackoverflow.questions.controllers.ControllerExceptionAdvice;
 import com.agilefaqs.stackoverflow.questions.controllers.QuestionsController;
+import com.agilefaqs.stackoverflow.questions.dao.HashMapQuestionsDao;
 import com.agilefaqs.stackoverflow.questions.dao.QuestionsDao;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class QuestionsApiTest {
     private final String questionTwoAsJson = "{\"id\":\"2\",\"question\":\"Can some one share some good sites to lean spring boot in detail.\",\"title\":\"Good sites for leaning spring boot\",\"tags\":[\"spring\",\"microservices\"],\"votes\":0,\"postedBy\":\"raghav\"}";
     private final String questionOneAsJson = "{\"id\":\"1\",\"question\":\"Can some one share the new features in java 8 and also some resources to learn them\",\"title\":\"New features in java 8\",\"tags\":[\"java\"],\"votes\":0,\"postedBy\":\"hari\"}";
     private final String toBePosted = "{\"question\":\"Let's ask something new\",\"title\":\"New question\",\"tags\":[\"random\"]}";
-    private String updatedQuestion;
+    private final String updatedQuestion = "{\"id\":\"3\",\"question\":\"I want to populate a new Principal object from the data passed in the headers of http request. How to do this in a servlet filter?\",\"title\":\"Set principal in servlet filter\",\"tags\":[\"java\",\"servlets\"]}";
 
     @Autowired
     private QuestionsController questionsController;
@@ -47,6 +48,7 @@ public class QuestionsApiTest {
             .standaloneSetup(questionsController)
             .setControllerAdvice(new ControllerExceptionAdvice())
             .build();
+        ((HashMapQuestionsDao)questionsDao).initializeData();
     }
 
     @Test
@@ -72,12 +74,12 @@ public class QuestionsApiTest {
 
     @Test
     public void update() throws Exception {
-        mockMvc.perform(put("/questions")
+        mockMvc.perform(put("/questions/3")
             .header("X-USER-ID", "raghav")
             .contentType(MediaType.APPLICATION_JSON)
             .content(updatedQuestion)
         )
-            .andExpect(status().isCreated());
+            .andExpect(status().isNoContent());
     }
 
     @Test

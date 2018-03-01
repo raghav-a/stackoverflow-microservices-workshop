@@ -27,6 +27,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.PUT)
     public ResponseEntity<?>  update(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId, @RequestBody Question input) {
+        input.setPostedBy(userId);
         questionsService.update(questionId, input);
         return ResponseEntity
             .noContent()
