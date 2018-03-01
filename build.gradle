@@ -44,11 +44,7 @@ subprojects {
         mavenCentral()
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
-        }
-    }
+
 
     dependencies {
         compile("com.google.guava:guava:23.5-jre")

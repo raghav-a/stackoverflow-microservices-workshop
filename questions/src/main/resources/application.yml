@@ -8,14 +8,6 @@ server:
       accesslog:
         enabled: true
 
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: true
-
-
 security:
   basic:
     enable: false
