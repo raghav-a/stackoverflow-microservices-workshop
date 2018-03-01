@@ -1,7 +1,7 @@
 package com.agilefaqs.stackoverflow.questions.dao;
 
+import com.agilefaqs.stackoverflow.questions.controllers.ApplicationException;
 import com.agilefaqs.stackoverflow.questions.model.Question;
-import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.google.common.collect.Lists;
 import org.springframework.http.HttpStatus;
 
