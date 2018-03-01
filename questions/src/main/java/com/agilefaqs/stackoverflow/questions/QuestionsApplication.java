@@ -1,6 +1,6 @@
 package com.agilefaqs.stackoverflow.questions;
 
-import com.agilefaqs.stackoverflow.exceptions.ControllerExceptionAdvice;
+import com.agilefaqs.stackoverflow.questions.controllers.ControllerExceptionAdvice;
 import com.agilefaqs.stackoverflow.questions.dao.HashMapQuestionsDao;
 import com.agilefaqs.stackoverflow.questions.dao.QuestionsDao;
 import org.springframework.boot.SpringApplication;
