@@ -2,16 +2,24 @@ package com.agilefaqs.stackoverflow.questions.api;
 
 import com.agilefaqs.stackoverflow.questions.controllers.ControllerExceptionAdvice;
 import com.agilefaqs.stackoverflow.questions.controllers.QuestionsController;
+import com.agilefaqs.stackoverflow.questions.dao.QuestionsDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -19,8 +27,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class QuestionsApiTest {
 
+    private final String questionThreeAsJson = "{\"id\":\"3\",\"question\":\"I want to populate Principal object from the data passed in the headers of http request. How to do this in a servlet filter?\",\"title\":\"Set principal in servlet filter\",\"tags\":[\"java\",\"servlets\"],\"votes\":0,\"postedBy\":\"raghav\"}";
+    private final String questionTwoAsJson = "{\"id\":\"2\",\"question\":\"Can some one share some good sites to lean spring boot in detail.\",\"title\":\"Good sites for leaning spring boot\",\"tags\":[\"spring\",\"microservices\"],\"votes\":0,\"postedBy\":\"raghav\"}";
+    private final String questionOneAsJson = "{\"id\":\"1\",\"question\":\"Can some one share the new features in java 8 and also some resources to learn them\",\"title\":\"New features in java 8\",\"tags\":[\"java\"],\"votes\":0,\"postedBy\":\"hari\"}";
+    private final String toBePosted = "{\"question\":\"Let's ask something new\",\"title\":\"New question\",\"tags\":[\"random\"]}";
+    private String updatedQuestion;
+
     @Autowired
     private QuestionsController questionsController;
+
+    @Autowired
+    private QuestionsDao questionsDao;
 
     private MockMvc mockMvc;
 
@@ -34,12 +51,16 @@ public class QuestionsApiTest {
 
     @Test
     public void fetchQuestionsForValidQuestionIds() throws Exception {
-        mockMvc.perform(get("/questions/1"))
-            .andExpect(status().isOk());
+
+        mockMvc.perform(get("/questions/1").contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().json(questionOneAsJson));
         mockMvc.perform(get("/questions/2"))
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(content().json(questionTwoAsJson));
         mockMvc.perform(get("/questions/3"))
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(content().json(questionThreeAsJson));
     }
 
     @Test
@@ -51,18 +72,40 @@ public class QuestionsApiTest {
 
     @Test
     public void update() throws Exception {
+        mockMvc.perform(put("/questions")
+            .header("X-USER-ID", "raghav")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(updatedQuestion)
+        )
+            .andExpect(status().isCreated());
     }
 
     @Test
     public void add() throws Exception {
+        mockMvc.perform(post("/questions")
+            .header("X-USER-ID", "raghav")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(toBePosted)
+        )
+            .andExpect(status().isCreated())
+            .andExpect(content().json("{\"questionId\":\"4\"}"));
+        assertNotNull(questionsDao.get("4"));
     }
 
     @Test
     public void upvote() throws Exception {
+        mockMvc.perform(post("/questions/1/upvote")
+            .header("X-USER-ID", "raghav"))
+            .andExpect(status().isNoContent());
+        assertEquals(questionsDao.get("1").getVotes(), new Integer(1));
     }
 
     @Test
     public void downvote() throws Exception {
+        mockMvc.perform(post("/questions/1/downvote")
+            .header("X-USER-ID", "raghav"))
+            .andExpect(status().isNoContent());
+        assertEquals(questionsDao.get("1").getVotes(), new Integer(-1));
     }
 
 }
