@@ -18,11 +18,11 @@ public class GenericHystrixCommand<T> extends HystrixCommand<T> {
     private Function<Throwable, T> fallback;
 
     public static <T> T execute(String groupKey, String commandkey, Supplier<T> toRun) {
-        return execute(groupKey, commandkey, toRun, null);
+        return execute(groupKey, commandkey, toRun, null, 3000, 20, 5);
     }
     public static <T> T execute(String groupKey, String commandkey,
-                                Supplier<T> toRun, Function<Throwable, T> fallback) {
-        return new GenericHystrixCommand<>(groupKey, commandkey, toRun, fallback).execute();
+                                Supplier<T> toRun, Function<Throwable, T> fallback, int timeout, int thresholdValue, int threadPoolSizze) {
+        return new GenericHystrixCommand<>(groupKey, commandkey, toRun, fallback, timeout, thresholdValue, threadPoolSizze).execute();
     }
     public static <T> Observable<T> executeObservable(String groupKey, String commandkey,
                                                       Supplier<T> toRun) {
@@ -30,22 +30,21 @@ public class GenericHystrixCommand<T> extends HystrixCommand<T> {
     }
     public static <T> Observable<T> executeObservable(String groupKey, String commandkey,
                                                       Supplier<T> toRun, Function<Throwable, T> fallback) {
-        return new GenericHystrixCommand<>(groupKey, commandkey, toRun, fallback)
+        return new GenericHystrixCommand<>(groupKey, commandkey, toRun, fallback, 3000, 20, 5)
             .toObservable();
     }
     public GenericHystrixCommand(String groupKey, String commandkey,
-                                 Supplier<T> toRun, Function<Throwable, T> fallback) {
+                                 Supplier<T> toRun, Function<Throwable, T> fallback, int timeout, int thresholdValue, int threadPoolSizze) {
         super(Setter
             .withGroupKey(HystrixCommandGroupKey.Factory.asKey(groupKey))
             .andThreadPoolPropertiesDefaults(
                 HystrixThreadPoolProperties.Setter()
-                .withCoreSize(5)
+                .withCoreSize(threadPoolSizze)
             )
             .andCommandKey(HystrixCommandKey.Factory.asKey(commandkey))
             .andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
-                .withCircuitBreakerRequestVolumeThreshold(10)
-                .withExecutionTimeoutInMilliseconds(3000)
-                .withCircuitBreakerRequestVolumeThreshold(20)
+                .withExecutionTimeoutInMilliseconds(timeout)
+                .withCircuitBreakerRequestVolumeThreshold(thresholdValue)
                 .withExecutionIsolationStrategy(
                     HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
             )

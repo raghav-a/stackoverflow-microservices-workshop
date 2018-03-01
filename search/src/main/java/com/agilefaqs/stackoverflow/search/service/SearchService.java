@@ -1,13 +1,11 @@
 package com.agilefaqs.stackoverflow.search.service;
 
-import com.agilefaqs.stackoverflow.search.controllers.SearchController;
 import com.agilefaqs.stackoverflow.search.model.Question;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapMaker;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
