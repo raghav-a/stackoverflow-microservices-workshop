@@ -1,8 +1,0 @@
-description = 'commons '
-
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-    // https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-core
-    compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.5.12'
-
-}

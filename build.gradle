@@ -57,8 +57,4 @@ subprojects {
     }
 }
 
-configure(subprojects - project(':commons')) {
-    dependencies {
-        compile project(':commons')
-    }
-}
+
