@@ -1,5 +1,6 @@
 package com.agilefaqs.stackoverflow.questions.api;
 
+import com.agilefaqs.stackoverflow.questions.controllers.ControllerExceptionAdvice;
 import com.agilefaqs.stackoverflow.questions.controllers.QuestionsController;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,7 @@ public class QuestionsApiTest {
     public void setup() {
         mockMvc = MockMvcBuilders
             .standaloneSetup(questionsController)
+            .setControllerAdvice(new ControllerExceptionAdvice())
             .build();
     }
 
@@ -43,7 +45,7 @@ public class QuestionsApiTest {
     @Test
     public void getInvalidQuestions() throws Exception {
         mockMvc.perform(get("/questions/4"))
-            .andExpect(status().isOk());
+            .andExpect(status().isNotFound());
 
     }
 
