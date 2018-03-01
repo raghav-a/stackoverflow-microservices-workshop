@@ -54,6 +54,7 @@ ribbon:
   eureka:
     enabled: true
 
+
 eureka:
   client:
     serviceUrl:

@@ -36,7 +36,7 @@ public class QuestionsController {
 
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<?> add(@RequestBody @Valid Question input, @RequestHeader("X-USER-ID") String userId) {
-        log.info(String.format("Save Question Called by %s : %s",userId, input));
+        log.info("Save Question Called by {} : {}",userId, input);
         input.setPostedBy(userId);
         input.validate();
         String id = questionsService.save(input);
