@@ -37,11 +37,11 @@ public class QuestionsService {
         questionsChannel.publish(input);
     }
 
-    public void upvote(String questionId) {
-        questionsDao.get(questionId).upvote();
+    public void upvote(String questionId, String userId) {
+        questionsDao.get(questionId).upvote(userId);
     }
 
-    public void downvote(String questionId) {
-        questionsDao.get(questionId).downvote();
+    public void downvote(String questionId, String userId) {
+        questionsDao.get(questionId).downvote(userId);
     }
 }

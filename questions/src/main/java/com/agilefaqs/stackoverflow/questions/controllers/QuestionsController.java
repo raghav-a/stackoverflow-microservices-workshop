@@ -38,7 +38,6 @@ public class QuestionsController {
     ResponseEntity<?> add(@RequestBody @Valid Question input, @RequestHeader("X-USER-ID") String userId) {
         log.info("Save Question Called by {} : {}",userId, input);
         input.setPostedBy(userId);
-        input.validate();
         String id = questionsService.save(input);
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -49,7 +48,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "/{questionId}/upvote", method = RequestMethod.POST)
     public ResponseEntity<?>  upvote(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId) {
-        questionsService.upvote(questionId);
+        questionsService.upvote(questionId, userId);
         return ResponseEntity
             .noContent()
             .build();
@@ -58,7 +57,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "/{questionId}/downvote", method = RequestMethod.POST)
     public ResponseEntity<?>  downvote(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId) {
-        questionsService.downvote(questionId);
+        questionsService.downvote(questionId, userId);
         return ResponseEntity
             .noContent()
             .build();

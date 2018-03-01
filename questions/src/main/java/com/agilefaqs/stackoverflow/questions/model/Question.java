@@ -1,7 +1,9 @@
 package com.agilefaqs.stackoverflow.questions.model;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Objects.nonNull;
 
@@ -13,7 +15,7 @@ public class Question {
     @NotNull
     private String title;
     private List<String> tags;
-    private Integer votes = 0;
+    private Map<String,Integer> votes = new HashMap<>();
     private String postedBy;
 
     public Question() {
@@ -25,11 +27,6 @@ public class Question {
         this.question = question;
         this.title = title;
         this.tags = tags;
-    }
-
-
-    public void validate() {
-        nonNull(title);
     }
 
 
@@ -58,20 +55,18 @@ public class Question {
     }
 
     public Integer getVotes() {
-        return votes;
+        return votes.values().stream().mapToInt(i -> i).sum();
     }
 
-    public void setVotes(Integer votes) {
-        this.votes = votes;
+
+    public void upvote(String userId) {
+        votes.put(userId,1);
     }
 
-    public void upvote() {
-        votes++;
+    public void downvote(String userId) {
+        votes.put(userId,-1);
     }
 
-    public void downvote() {
-        votes--;
-    }
 
     @Override
     public String toString() {

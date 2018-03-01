@@ -60,9 +60,6 @@ public class Answer {
         return votes.values().stream().mapToInt(i -> i).sum();
     }
 
-   // public void setVotes(Integer votes) {
-     //   this.votes = votes;
-    //}
 
     public void upvote(String userId) {
         votes.put(userId,1);
