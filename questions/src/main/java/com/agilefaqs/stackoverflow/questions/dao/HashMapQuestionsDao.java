@@ -14,11 +14,17 @@ public class HashMapQuestionsDao implements QuestionsDao {
     private Map<String, Question> questions = new HashMap<>();
 
     public HashMapQuestionsDao() {
+        initializeData();
+    }
+
+    public void initializeData() {
+        questions.clear();
         questions.put("1", new Question("1", "hari",
             "New features in java 8", "Can some one share the new features in java 8 and also some resources to learn them",
             Lists.newArrayList("java")));
         questions.put("2", new Question("2", "raghav","Good sites for leaning spring boot", "Can some one share some good sites to lean spring boot in detail.", Lists.newArrayList("spring", "microservices")));
         questions.put("3", new Question("3", "raghav", "Set principal in servlet filter", "I want to populate Principal object from the data passed in the headers of http request. How to do this in a servlet filter?", Lists.newArrayList("java", "servlets")));
+
     }
 
 
