@@ -1,6 +1,6 @@
 package com.agilefaqs.stackoverflow.gateway;
 
-import com.agilefaqs.stackoverflow.gateway.clients.SessionsClient;
+import com.agilefaqs.stackoverflow.gateway.clients.SessionsFeignClient;
 import com.agilefaqs.stackoverflow.gateway.config.AuthConfig;
 import com.agilefaqs.stackoverflow.gateway.filters.AuthenticationFilter;
 import com.agilefaqs.stackoverflow.gateway.filters.ErrorFilter;
@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
@@ -27,7 +28,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 @EnableZuulProxy
 @RestController
 @EnableFeignClients
-@EnableDiscoveryClient
+@EnableEurekaClient
 @EnableCaching
 public class GatewayApplication {
 
@@ -43,7 +44,7 @@ public class GatewayApplication {
 
     @Bean
     @Autowired
-    public AuthenticationFilter filter(SessionsClient sessionsClient, AuthConfig authConfig) {
+    public AuthenticationFilter filter(SessionsFeignClient sessionsClient, AuthConfig authConfig) {
         return new AuthenticationFilter(sessionsClient, authConfig);
     }
 

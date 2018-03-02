@@ -24,9 +24,6 @@ hystrix:
             timeoutInMilliseconds: 20000
 
 zuul:
-  SendErrorFilter:
-      error:
-        disable: true
   prefix: /api
   routes:
     questions:

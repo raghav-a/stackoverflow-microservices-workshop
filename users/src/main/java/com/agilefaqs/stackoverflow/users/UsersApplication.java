@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-
 @EnableEurekaClient
 public class UsersApplication {
     public static void main(String[] args) {
