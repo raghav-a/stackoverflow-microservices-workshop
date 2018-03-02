@@ -85,7 +85,7 @@ public class QuestionsApiTest {
     }
 
     @Test
-    public void add() throws Exception {
+    public void postANewQuestion() throws Exception {
         mockMvc.perform(post("/questions")
             .header("X-USER-ID", "raghav")
             .contentType(MediaType.APPLICATION_JSON)
@@ -97,7 +97,7 @@ public class QuestionsApiTest {
     }
 
     @Test
-    public void upvote() throws Exception {
+    public void upvoteQuestion() throws Exception {
         mockMvc.perform(post("/questions/1/upvote")
             .header("X-USER-ID", "raghav"))
             .andExpect(status().isNoContent());
@@ -105,7 +105,7 @@ public class QuestionsApiTest {
     }
 
     @Test
-    public void downvote() throws Exception {
+    public void downvoteQuestion() throws Exception {
         mockMvc.perform(post("/questions/1/downvote")
             .header("X-USER-ID", "raghav"))
             .andExpect(status().isNoContent());
