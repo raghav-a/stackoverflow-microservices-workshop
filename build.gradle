@@ -1,6 +1,5 @@
 allprojects  {
     apply plugin: 'maven'
-    apply plugin: 'org.springframework.boot'
 
     group = 'com.agilefaqs.stackoverflow'
     version = '1.0-SNAPSHOT'
@@ -20,7 +19,6 @@ buildscript {
 
 }
 
-bootRepackage.enabled = false
 
 subprojects {
     apply plugin: 'java'
@@ -35,8 +33,6 @@ subprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-
-    bootRepackage.enabled = false
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'

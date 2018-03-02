@@ -2,8 +2,6 @@ package com.agilefaqs.stackoverflow.questions.servcie;
 
 import com.agilefaqs.stackoverflow.questions.dao.QuestionsDao;
 import com.agilefaqs.stackoverflow.questions.model.Question;
-import com.agilefaqs.stackoverflow.questions.queues.Queues;
-import com.agilefaqs.stackoverflow.questions.queues.Queues.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
