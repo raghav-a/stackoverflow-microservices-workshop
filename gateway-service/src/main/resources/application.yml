@@ -26,7 +26,7 @@ hystrix:
 zuul:
   SendErrorFilter:
       error:
-        disable: true
+        disable: false
   prefix: /api
   routes:
     questions:
@@ -44,10 +44,6 @@ zuul:
     users:
           path: /users/**
           serviceId: users-service
-          stripPrefix: false
-    sessions:
-          path: /sessions/**
-          serviceId: sessions-service
           stripPrefix: false
 
 ribbon:
@@ -72,31 +68,9 @@ logging:
 security:
   basic:
     enable: false
+  ignored: /**
 
 management:
   security:
     enabled: false
 
-auth-config:
-  serviceApiMap:
-    questions:
-      - method: POST
-        url: /api/questions/*
-      - method: POST
-        url: /api/questions/*/upvote
-      - method: POST
-        url: /api/questions/*/downvote
-      - method: PUT
-        url: /api/questions/*
-    answers:
-      - method: POST
-        url: /api/answers/*
-      - method: POST
-        url: /api/answers/*/upvote
-      - method: POST
-        url: /api/answers/*/downvote
-      - method: PUT
-        url: /api/answers/*
-    users:
-      - method: GET
-        url: /api/users/*
