@@ -21,9 +21,10 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 20000
+            timeoutInMilliseconds: 30000
 
 zuul:
+  ribbonIsolationStrategy: THREAD
   prefix: /api
   routes:
     questions:
