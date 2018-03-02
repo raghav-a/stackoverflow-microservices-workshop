@@ -1,17 +1,13 @@
 rootProject.name = 'stackoverflow-microservices-workshop'
 include ':gateway-service'
-include ':discovery-service'
 include ':users'
-include ':sessions'
 include ':questions'
 include ':answers'
 include ':search'
 include ':commons'
 
 project(':gateway-service').projectDir = "$rootDir/gateway-service" as File
-project(':discovery-service').projectDir = "$rootDir/discovery-service" as File
 project(':users').projectDir = "$rootDir/users" as File
-project(':sessions').projectDir = "$rootDir/sessions" as File
 project(':questions').projectDir = "$rootDir/questions" as File
 project(':answers').projectDir = "$rootDir/answers" as File
 project(':search').projectDir = "$rootDir/search" as File

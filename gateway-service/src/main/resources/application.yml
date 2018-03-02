@@ -31,36 +31,22 @@ zuul:
   routes:
     questions:
       path: /questions/**
-      serviceId: questions-service
+      url: http://localhost:8091/
       stripPrefix: false
     answers:
           path: /answers/**
-          serviceId: answers-service
+          url: http://localhost:8092/
           stripPrefix: false
     search:
           path: /search/**
-          serviceId: search-service
+          url: http://localhost:8093/
           stripPrefix: false
     users:
           path: /users/**
-          serviceId: users-service
-          stripPrefix: false
-    sessions:
-          path: /sessions/**
-          serviceId: sessions-service
+          url: http://localhost:8095/
           stripPrefix: false
 
-ribbon:
-  eureka:
-    enabled: true
 
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: true
-      
 server:
   port: ${port:8765}
 
@@ -72,31 +58,9 @@ logging:
 security:
   basic:
     enable: false
+  ignored: /**
 
 management:
   security:
     enabled: false
 
-auth-config:
-  serviceApiMap:
-    questions:
-      - method: POST
-        url: /api/questions/*
-      - method: POST
-        url: /api/questions/*/upvote
-      - method: POST
-        url: /api/questions/*/downvote
-      - method: PUT
-        url: /api/questions/*
-    answers:
-      - method: POST
-        url: /api/answers/*
-      - method: POST
-        url: /api/answers/*/upvote
-      - method: POST
-        url: /api/answers/*/downvote
-      - method: PUT
-        url: /api/answers/*
-    users:
-      - method: GET
-        url: /api/users/*

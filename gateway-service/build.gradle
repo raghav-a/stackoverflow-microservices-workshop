@@ -2,23 +2,12 @@ description = ''
 
 dependencies {
 
-    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework:spring-web")
     compile("org.springframework.cloud:spring-cloud-starter-zuul")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile('org.springframework.cloud:spring-cloud-starter-sleuth')
 
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-    compile(group: 'com.netflix.feign', name: 'feign-core', version: '8.18.0')
-    // https://mvnrepository.com/artifact/com.netflix.feign/feign-okhttp
-    compile(group: 'com.netflix.feign', name: 'feign-okhttp', version: '8.18.0')
-    // https://mvnrepository.com/artifact/io.github.openfeign/feign-gson
-    compile(group: 'io.github.openfeign', name: 'feign-gson', version: '9.5.1')
-    // https://mvnrepository.com/artifact/io.github.openfeign/feign-slf4j
-    compile(group: 'io.github.openfeign', name: 'feign-slf4j', version: '9.5.1')
-
-    //compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version:'1.0.0.RELEASE'
 }
 
 springBoot {
