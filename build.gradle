@@ -1,6 +1,5 @@
 allprojects  {
     apply plugin: 'maven'
-    apply plugin: 'org.springframework.boot'
 
     group = 'com.agilefaqs.stackoverflow'
     version = '1.0-SNAPSHOT'
