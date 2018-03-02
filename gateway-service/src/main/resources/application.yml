@@ -21,7 +21,6 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-
            timeoutInMilliseconds: 30000
 
 zuul:
