@@ -1,0 +1,4 @@
+applications:
+- name: questions-dev
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: build/libs/questions-1.0-SNAPSHOT.jar
