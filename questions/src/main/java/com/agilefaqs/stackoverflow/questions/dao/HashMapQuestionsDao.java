@@ -14,6 +14,11 @@ public class HashMapQuestionsDao implements QuestionsDao {
     private Map<String, Question> questions = new HashMap<>();
 
     public HashMapQuestionsDao() {
+        initializeData();
+    }
+
+    public void initializeData() {
+        questions.clear();
         questions.put("1", new Question("1", "hari",
             "New features in java 8", "Can some one share the new features in java 8 and also some resources to learn them",
             Lists.newArrayList("java")));
