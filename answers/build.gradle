@@ -13,11 +13,6 @@ dependencies {
 
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
-    //compile('org.springframework.cloud:spring-cloud-starter-oauth2')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
-springBoot {
-    mainClass = "com.agilefaqs.stackoverflow.answers.AnswersApplication"
-}

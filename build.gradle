@@ -14,17 +14,17 @@ buildscript {
             classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
             classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
         }
+
     }
 
 
 }
 
-
+bootRepackage.enabled = false
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply plugin: "io.spring.dependency-management"
     apply plugin: "org.springframework.boot"
 
 
@@ -36,19 +36,19 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
+    bootRepackage.enabled = false
+
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
 
     repositories {
         mavenCentral()
-    }
-
-    dependencyManagement {
-        imports {
-            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
     }
+
 
     dependencies {
         compile("com.google.guava:guava:23.5-jre")

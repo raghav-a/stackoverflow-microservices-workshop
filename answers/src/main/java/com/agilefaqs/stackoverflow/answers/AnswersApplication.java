@@ -5,12 +5,10 @@ import com.agilefaqs.stackoverflow.answers.dao.HashMapAnswersDao;
 import com.agilefaqs.stackoverflow.exceptions.ControllerExceptionAdvice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@EnableEurekaClient
 public class AnswersApplication {
     public static void main(String[] args) {
         SpringApplication.run(AnswersApplication.class);

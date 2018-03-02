@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@EnableEurekaClient
-@EnableFeignClients
 public class QuestionsApplication {
     public static void main(String[] args) {
         SpringApplication.run(QuestionsApplication.class);
