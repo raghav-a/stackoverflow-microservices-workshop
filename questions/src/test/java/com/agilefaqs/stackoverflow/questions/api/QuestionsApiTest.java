@@ -54,7 +54,6 @@ public class QuestionsApiTest {
 
     @Test
     public void fetchQuestionsForValidQuestionIds() throws Exception {
-
         mockMvc.perform(get("/questions/1").contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().json(questionOneAsJson));
