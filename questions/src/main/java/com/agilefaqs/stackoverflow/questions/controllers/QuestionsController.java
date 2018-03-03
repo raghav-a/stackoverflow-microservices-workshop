@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.security.Principal;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("questions")
@@ -25,7 +26,7 @@ public class QuestionsController {
         return questionsService.get(questionId);
     }
 
-    @RequestMapping(value = "/{questionId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{questionId}", method = PUT)
     public ResponseEntity<?>  update(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId, @RequestBody Question input) {
         input.setPostedBy(userId);
         questionsService.update(questionId, input);
@@ -35,7 +36,7 @@ public class QuestionsController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = POST)
     ResponseEntity<?> add(@RequestBody @Valid Question input, @RequestHeader("X-USER-ID") String userId) {
         log.info("Save Question Called by {} : {}",userId, input);
         input.setPostedBy(userId);
@@ -47,7 +48,7 @@ public class QuestionsController {
 
     }
 
-    @RequestMapping(value = "/{questionId}/upvote", method = RequestMethod.POST)
+    @RequestMapping(value = "/{questionId}/upvote", method = POST)
     public ResponseEntity<?>  upvote(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId) {
         questionsService.upvote(questionId, userId);
         return ResponseEntity
@@ -56,7 +57,7 @@ public class QuestionsController {
 
     }
 
-    @RequestMapping(value = "/{questionId}/downvote", method = RequestMethod.POST)
+    @RequestMapping(value = "/{questionId}/downvote", method = POST)
     public ResponseEntity<?>  downvote(@PathVariable("questionId") String questionId, @RequestHeader("X-USER-ID") String userId) {
         questionsService.downvote(questionId, userId);
         return ResponseEntity
