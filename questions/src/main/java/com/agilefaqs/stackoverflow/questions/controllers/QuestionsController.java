@@ -21,7 +21,6 @@ public class QuestionsController {
     @Autowired
     private QuestionsService questionsService;
 
-    @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
     public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
         return questionsService.get(questionId);
     }
