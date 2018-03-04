@@ -22,6 +22,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
     public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
+        log.info("Fetch Question Called for {} ",questionId);
         return questionsService.get(questionId);
     }
 
