@@ -24,8 +24,6 @@ subprojects {
     apply plugin: "io.spring.dependency-management"
     apply plugin: "org.springframework.boot"
 
-
-
     ext {
         springBootVersion = "1.5.9.RELEASE"
     }
