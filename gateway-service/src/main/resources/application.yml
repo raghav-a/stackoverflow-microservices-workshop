@@ -27,22 +27,7 @@ zuul:
   ribbonIsolationStrategy: THREAD
   prefix: /api
   routes:
-    questions:
-      path: /questions/**
-      url: http://localhost:8091/
-      stripPrefix: false
-    answers:
-          path: /answers/**
-          url: http://localhost:8092/
-          stripPrefix: false
-    search:
-          path: /search/**
-          url: http://localhost:8093/
-          stripPrefix: false
-    users:
-          path: /users/**
-          url: http://localhost:8095/
-          stripPrefix: false
+
 
 
 server:
