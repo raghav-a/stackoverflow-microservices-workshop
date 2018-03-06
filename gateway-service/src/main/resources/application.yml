@@ -29,20 +29,20 @@ zuul:
   routes:
     questions:
       path: /questions/**
-      serviceId: questions-service
+      url: http://localhost:8091/
       stripPrefix: false
     answers:
-          path: /answers/**
-          serviceId: answers-service
-          stripPrefix: false
+      path: /answers/**
+      url: http://localhost:8092/
+      stripPrefix: false
     search:
-          path: /search/**
-          serviceId: search-service
-          stripPrefix: false
+      path: /search/**
+      url: http://localhost:8093/
+      stripPrefix: false
     users:
-          path: /users/**
-          serviceId: users-service
-          stripPrefix: false
+      path: /users/**
+      url: http://localhost:8095/
+      stripPrefix: false
 
 ribbon:
   eureka:
