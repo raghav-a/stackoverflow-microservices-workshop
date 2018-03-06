@@ -9,6 +9,7 @@ public class Question {
     private String title;
     private String postedBy;
     private List<String> tags;
+    private Integer votes;
 
     @Override
     public boolean equals(Object o) {
@@ -28,12 +29,13 @@ public class Question {
     public Question() {
     }
 
-    public Question(String id, String postedBy,String title, String question,  List<String> tags) {
+    public Question(String id, String postedBy,String title, String question,  List<String> tags, int votes) {
         this.id = id;
         this.question = question;
         this.title = title;
         this.postedBy = postedBy;
         this.tags = tags;
+        this.votes = votes;
     }
 
     public String getId() {
@@ -85,5 +87,13 @@ public class Question {
             ", postedBy='" + postedBy + '\'' +
             ", tags=" + tags +
             '}';
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
 }
