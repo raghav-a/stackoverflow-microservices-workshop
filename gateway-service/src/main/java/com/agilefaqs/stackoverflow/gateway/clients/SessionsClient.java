@@ -39,9 +39,9 @@ public class SessionsClient {
 
     private Supplier<UserDetail> fetchUserDetailsFromSessions(AuthRequest authRequest) {
         return () -> {
-            final UserDetail isValid = sessionsFeignClient.validateToken(authRequest);
-            updateInLocalCache(authRequest, isValid);
-            return isValid;
+            final UserDetail userDetail = sessionsFeignClient.validateToken(authRequest);
+            updateInLocalCache(authRequest, userDetail);
+            return userDetail;
         };
     }
 
