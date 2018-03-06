@@ -35,6 +35,7 @@ public class Question {
         this.title = title;
         this.postedBy = postedBy;
         this.tags = tags;
+        this.votes = votes;
     }
 
     public String getId() {
