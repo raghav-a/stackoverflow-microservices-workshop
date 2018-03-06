@@ -47,30 +47,44 @@ public class AuthenticationFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-        log.info("Authentication filter invoked");
-
+        log.info("Authentication filter invoked for : "+RequestContext.getCurrentContext().getRequest().getRequestURI());
         RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+
         try {
-            HttpServletRequest request = ctx.getRequest();
-            log.info("request uri : " + request.getRequestURI());
-            final String token = request.getHeader("token");
-            final AuthRequest authRequest = new AuthRequest(token);
-            if (authConfig.needsAuthentication(request.getRequestURI(), request.getMethod())) {
-                UserDetail userDetail = sessionsClient.validateToken(authRequest);
-                log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
-                log.info(String.format("Is response valid : %s", userDetail!=null));
-                Preconditions.checkNotNull(userDetail);
-                ctx.addZuulRequestHeader("X-USER-ID", userDetail.getUserId());
+            final AuthRequest authRequest = new AuthRequest(getToken(request));
+            if (authConfig.needsAuthentication(request)) {
+                UserDetail userDetail = authenticate(request, authRequest);
+                addHeader(ctx, userDetail);
             }
 
         } catch (RuntimeException e) {
-            e.printStackTrace();
-            log.info("Error message " + e.getMessage());
-            ctx.getResponse().setStatus(HttpStatus.FORBIDDEN.value());
-            ctx.setResponseBody("Token Authentication Failed.");
-            throw new ApplicationException("Token Authentication Failed",HttpStatus.FORBIDDEN);
+            return handleException(ctx, e);
         }
 
         return null;
+    }
+
+    private String getToken(HttpServletRequest request) {
+        return request.getHeader("token");
+    }
+
+    private Object handleException(RequestContext ctx, RuntimeException e) {
+        log.info("Error message " + e.getMessage());
+        ctx.getResponse().setStatus(HttpStatus.FORBIDDEN.value());
+        ctx.setResponseBody("Token Authentication Failed.");
+        throw new ApplicationException("Token Authentication Failed",HttpStatus.FORBIDDEN);
+    }
+
+    private void addHeader(RequestContext ctx, UserDetail userDetail) {
+        ctx.addZuulRequestHeader("X-USER-ID", userDetail.getUserId());
+    }
+
+    private UserDetail authenticate(HttpServletRequest request, AuthRequest authRequest) {
+        UserDetail userDetail = sessionsClient.validateToken(authRequest);
+        log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+        log.info(String.format("Is response valid : %s", userDetail!=null));
+        Preconditions.checkNotNull(userDetail);
+        return userDetail;
     }
 }
