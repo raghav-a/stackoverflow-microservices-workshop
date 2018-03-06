@@ -24,6 +24,9 @@ hystrix:
            timeoutInMilliseconds: 30000
 
 zuul:
+  SendErrorFilter:
+    error:
+      disable: true
   ribbonIsolationStrategy: THREAD
   prefix: /api
   routes:
