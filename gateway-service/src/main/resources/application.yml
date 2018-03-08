@@ -54,6 +54,7 @@ zuul:
 ribbon:
   eureka:
     enabled: true
+  ReadTimeout: 10000
 
 
 eureka:
