@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,7 +32,9 @@ public class AuthConfig {
         this.serviceApiMap = serviceApiMap;
     }
 
-    public boolean needsAuthentication(String url, String method) {
+    public boolean needsAuthentication(HttpServletRequest request) {
+        String url = request.getRequestURI();
+        String method = request.getMethod();
         final String[] tokens = url.split("/");
         Preconditions.checkArgument(tokens.length >= 3);
         final Boolean authenticationNeeded = Optional.ofNullable(serviceApiMap.get(tokens[2]))
