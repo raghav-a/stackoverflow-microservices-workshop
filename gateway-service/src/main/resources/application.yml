@@ -58,11 +58,6 @@ ribbon:
   ReadTimeout: 10000
 
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: true
       
 server:
   port: ${port:8765}
