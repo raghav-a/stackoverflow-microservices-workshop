@@ -1,0 +1,779 @@
+{
+	"variables": [],
+	"info": {
+		"name": "stackoverflow-workshop",
+		"_postman_id": "4256c3c2-2579-35c1-fb6c-38e9a1918ca3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "stackoverflow",
+			"description": "",
+			"item": [
+				{
+					"name": "stackoverflow",
+					"description": "",
+					"item": [
+						{
+							"name": "questions",
+							"description": "",
+							"item": [
+								{
+									"name": "local",
+									"description": "",
+									"item": [
+										{
+											"name": "GetQuestionsDirectly",
+											"request": {
+												"url": "localhost:8091/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "GetQuestionsViaGateway",
+											"request": {
+												"url": "localhost:8765/api/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "PostQuestionViaGateway",
+											"request": {
+												"url": "localhost:8765/api/questions/",
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"description": ""
+													},
+													{
+														"key": "token",
+														"value": "3055a670-23be-444a-bd6a-0b7c7c997c2e",
+														"description": ""
+													},
+													{
+														"key": "",
+														"value": "",
+														"description": "",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n\t\"title\": \"spring security\",\n    \"question\": \"Please guggest some good books for Spring Security\",\n    \"tags\": [\"spring\",\"microservices\",\"security\"]\n}"
+												},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "PostQuestionDirectly",
+											"request": {
+												"url": "localhost:8091/questions/",
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"description": ""
+													},
+													{
+														"key": "X-USER-ID",
+														"value": "raghav",
+														"description": ""
+													},
+													{
+														"key": "",
+														"value": "",
+														"description": "",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"question\": \"how to use streams in java 8 to filter items in a collection based on a criteria\",\n    \"tags\": [\"java\",\"streams\",],\n    \"title\": \"filter in java 8\"\n}"
+												},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "GetQuestionsAfterVotes",
+											"request": {
+												"url": "localhost:8765/api/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "GetQuestionsAfterDownVote",
+											"request": {
+												"url": "localhost:8765/api/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "UpvoteQuestionLocal",
+											"request": {
+												"url": "localhost:8091/questions/1/upvote",
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-USER-ID",
+														"value": "raghav",
+														"description": ""
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "X-USER-ID",
+															"value": "raghav",
+															"description": "",
+															"type": "text"
+														}
+													]
+												},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "DownvoteQuestionLocal",
+											"request": {
+												"url": "localhost:8091/questions/1/downvote",
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-USER-ID",
+														"value": "raghav",
+														"description": ""
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "X-USER-ID",
+															"value": "raghav",
+															"description": "",
+															"type": "text"
+														}
+													]
+												},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "UpvoteQuestionViaGateway",
+											"request": {
+												"url": "localhost:8765/api/questions/1/upvote",
+												"method": "POST",
+												"header": [
+													{
+														"key": "token",
+														"value": "67e5b145-0dd3-4c20-9026-a9fb4795219a",
+														"description": ""
+													}
+												],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "DownvoteQuestionViaGateway",
+											"request": {
+												"url": "localhost:8765/api/questions/1/upvote",
+												"method": "POST",
+												"header": [
+													{
+														"key": "token",
+														"value": "67e5b145-0dd3-4c20-9026-a9fb4795219a",
+														"description": ""
+													}
+												],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "pcf",
+									"description": "",
+									"item": [
+										{
+											"name": "GetQuestionsPCF-Dev",
+											"request": {
+												"url": "http://questions-dev.cfapps.io/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "GetQuestionsPCFGateway",
+											"request": {
+												"url": "http://apigateway.cfapps.io/api/questions/1",
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"description": ""
+											},
+											"response": []
+										},
+										{
+											"name": "PostQuestionPCFViaGateway",
+											"request": {
+												"url": "http://apigateway.cfapps.io/api/questions/",
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"description": ""
+													},
+													{
+														"key": "token",
+														"value": "86496bce-8e18-4a16-82a7-20c84b7c197a",
+														"description": ""
+													},
+													{
+														"key": "",
+														"value": "",
+														"description": "",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"question\": \"Please guggest some good books for Spring Security\",\n    \"tags\": [\"spring\",\"microservices\",\"security\"]\n}"
+												},
+												"description": ""
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "answers",
+							"description": "",
+							"item": [
+								{
+									"name": "GetAnswersDirectly",
+									"request": {
+										"url": "localhost:8092/answers/1",
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GetAnswersViaGateway",
+									"request": {
+										"url": "localhost:8765/api/answers/3",
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GetAnswersPCF",
+									"request": {
+										"url": "https://answers.cfapps.io/answers/3",
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GetAnswersPCFGateway",
+									"request": {
+										"url": "http://apigateway.cfapps.io/api/answers/1",
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "UpvoteAnswerLocal",
+									"request": {
+										"url": "localhost:8092/answers/1/upvote",
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-USER-ID",
+												"value": "raghav",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "X-USER-ID",
+													"value": "raghav",
+													"description": "",
+													"type": "text"
+												}
+											]
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "DownvoteAnswerLocal",
+									"request": {
+										"url": "localhost:8092/answers/1/downvote",
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-USER-ID",
+												"value": "raghav",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "X-USER-ID",
+													"value": "raghav",
+													"description": "",
+													"type": "text"
+												}
+											]
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "UpvoteAnswersDirectly",
+									"request": {
+										"url": "localhost:8765/api/questions/1/upvote",
+										"method": "POST",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "search",
+							"description": "",
+							"item": [
+								{
+									"name": "SearchByQueryLocal",
+									"request": {
+										"url": {
+											"raw": "localhost:8093/search/getAll?searchQuery=can",
+											"host": [
+												"localhost"
+											],
+											"port": "8093",
+											"path": [
+												"search",
+												"getAll"
+											],
+											"query": [
+												{
+													"key": "searchQuery",
+													"value": "can",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "SearchByTagLocal",
+									"request": {
+										"url": {
+											"raw": "localhost:8093/search/getAllForTag?tag=java",
+											"host": [
+												"localhost"
+											],
+											"port": "8093",
+											"path": [
+												"search",
+												"getAllForTag"
+											],
+											"query": [
+												{
+													"key": "tag",
+													"value": "java",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "SearchViaGateway",
+									"request": {
+										"url": {
+											"raw": "localhost:8765/api/search/getAll?searchQuery=spring",
+											"host": [
+												"localhost"
+											],
+											"port": "8765",
+											"path": [
+												"api",
+												"search",
+												"getAll"
+											],
+											"query": [
+												{
+													"key": "searchQuery",
+													"value": "spring",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "SearchOnTagViaPCFGateway",
+									"request": {
+										"url": {
+											"raw": "https://apigateway.cfapps.io/api/search/getAllForTag?tag=microservices",
+											"protocol": "https",
+											"host": [
+												"apigateway",
+												"cfapps",
+												"io"
+											],
+											"path": [
+												"api",
+												"search",
+												"getAllForTag"
+											],
+											"query": [
+												{
+													"key": "tag",
+													"value": "microservices",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "SearchViaPCFGateway",
+									"request": {
+										"url": {
+											"raw": "https://apigateway.cfapps.io/api/search/getAllForTag?tag=microservices",
+											"protocol": "https",
+											"host": [
+												"apigateway",
+												"cfapps",
+												"io"
+											],
+											"path": [
+												"api",
+												"search",
+												"getAllForTag"
+											],
+											"query": [
+												{
+													"key": "tag",
+													"value": "microservices",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "user-profile",
+							"description": "",
+							"item": [
+								{
+									"name": "GetUserProfileDirectly",
+									"request": {
+										"url": "localhost:8765/api/users/raghav",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "token",
+												"value": "67e5b145-0dd3-4c20-9026-a9fb4795219a",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"userId\": \"bhavin\",\n\t\"password\": \"qwesda\",\n\t\"email\": \"bhavin@agilefaqs.com\",\n\t\"firstName\": \"bhavin\",\n\t\"lastName\": \"kamanni\"\n\t\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GetUserProfileViaGateway",
+									"request": {
+										"url": "localhost:8765/api/users/raghav",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "token",
+												"value": "67e5b145-0dd3-4c20-9026-a9fb4795219a",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"userId\": \"bhavin\",\n\t\"password\": \"qwesda\",\n\t\"email\": \"bhavin@agilefaqs.com\",\n\t\"firstName\": \"bhavin\",\n\t\"lastName\": \"kamanni\"\n\t\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "SaveUserProfileViaGateway",
+									"request": {
+										"url": "localhost:8765/api/users",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"userId\": \"bhavin\",\n\t\"password\": \"qwesda\",\n\t\"email\": \"bhavin@agilefaqs.com\",\n\t\"firstName\": \"bhavin\",\n\t\"lastName\": \"kamanni\"\n\t\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "PostUserProfileDirectly",
+									"request": {
+										"url": "localhost:8095/users/",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"userId\": \"bhavin\",\n\t\"password\": \"qwedsa\",\n\t\"email\": \"bhavin@agilefaqs.com\",\n\t\"firstName\": \"bhavin\",\n\t\"lastName\": \"kamani\"\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GetUserProfilePCF",
+									"request": {
+										"url": "https://users.cfapps.io/users/raghav",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "token",
+												"value": "67e5b145-0dd3-4c20-9026-a9fb4795219a",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"userId\": \"bhavin\",\n\t\"password\": \"qwesda\",\n\t\"email\": \"bhavin@agilefaqs.com\",\n\t\"firstName\": \"bhavin\",\n\t\"lastName\": \"kamanni\"\n\t\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "login",
+							"description": "",
+							"item": [
+								{
+									"name": "LoginDirectly",
+									"request": {
+										"url": "localhost:8094/sessions/login",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \"userId\": \"hari\",\n \"password\": \"qwedsa\"\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "LoginViaGateway",
+									"request": {
+										"url": "localhost:8765/api/sessions/login",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \"userId\": \"raghav\",\n \"password\": \"qwedsa\"\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "LoginOnPCFGateway",
+									"request": {
+										"url": "localhost:8765/api/sessions/login",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \"userId\": \"raghav\",\n \"password\": \"qwedsa\"\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "eureka",
+							"description": "",
+							"item": [
+								{
+									"name": "DeleteInstanceOnEureka",
+									"request": {
+										"url": "http://localhost:8761/eureka/apps/SESSIONS-SERVICE/192.168.1.3:sessions-service:8098",
+										"method": "DELETE",
+										"header": [],
+										"body": {},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
