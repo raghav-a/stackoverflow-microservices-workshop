@@ -1,4 +1,4 @@
-rootProject.name = 'stackoverflow-microservices-workshop'
+rootProject.name = 'iteration3'
 include ':gateway-service'
 include ':users'
 include ':questions'
