@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("questions")
@@ -23,6 +26,12 @@ public class QuestionsController {
     @RequestMapping(value = "/{questionId}", method = RequestMethod.GET)
     public @ResponseBody  Question get(@PathVariable("questionId") String questionId) {
         return questionsService.get(questionId);
+    }
+
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Question> listAll() {
+        return new ArrayList<>(questionsService.listAll());
     }
 
     @RequestMapping(value = "/{questionId}", method = RequestMethod.PUT)

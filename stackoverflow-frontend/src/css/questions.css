@@ -1,0 +1,22 @@
+ul {
+    list-style-type: none;
+    padding: 2px;
+}
+
+.questions-container{
+    float: left;
+    width: 70%;
+    padding: 20px;
+    height: 200px;
+}
+
+.questions-list {
+    
+
+}
+
+.questions-item {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    padding: 5px;
+}

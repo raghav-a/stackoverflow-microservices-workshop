@@ -7,6 +7,8 @@ import com.agilefaqs.stackoverflow.questions.queues.Queues.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 public class QuestionsService {
 
@@ -43,5 +45,9 @@ public class QuestionsService {
 
     public void downvote(String questionId, String userId) {
         questionsDao.get(questionId).downvote(userId);
+    }
+
+    public Collection<Question> listAll() {
+        return questionsDao.getAll();
     }
 }

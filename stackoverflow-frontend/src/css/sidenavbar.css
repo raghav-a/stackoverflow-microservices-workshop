@@ -1,0 +1,13 @@
+.side-nav-bar {
+    float: left;
+    width: 20%;
+    height: 300px; /* only for demonstration, should be removed */
+    background: lightpink;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }

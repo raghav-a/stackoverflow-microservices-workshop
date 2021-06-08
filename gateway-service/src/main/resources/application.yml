@@ -24,6 +24,8 @@ hystrix:
             timeoutInMilliseconds: 30000
 
 zuul:
+  sensitiveHeaders:
+    ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   SendErrorFilter:
     error:
       disable: true
