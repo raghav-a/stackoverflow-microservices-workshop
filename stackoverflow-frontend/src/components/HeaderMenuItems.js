@@ -1,28 +1,23 @@
 export const HeaderMenuItems = [
     {
-        title: "home",
-        url: "#",
-        cName: "nav-links"
+        title: "Home",
+        url: "/",
+        cName: "nav-links s-btn"
     },
     {
-        title: "services",
+        title: "Products",
         url: "#",
-        cName: "nav-links"
+        cName: "nav-links s-btn"
     },
     {
-        title: "products",
-        url: "#",
-        cName: "nav-links"
+        title: "Login",
+        url: "/login",
+        cName: "nav-links s-btn"
     },
     {
-        title: "contact us",
-        url: "#",
-        cName: "nav-links"
-    },
-    {
-        title: "Sign up",
-        url: "#",
-        cName: "nav-links"
+        title: "Signup",
+        url: "/signup",
+        cName: "nav-links s-btn"
     }
 
 

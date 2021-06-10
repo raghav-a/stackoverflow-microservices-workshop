@@ -29,6 +29,8 @@ public class User {
     private String password;
     private String email;
     private String firstName;
+    private String lastName;
+
 
     public void setUserId(String userId) {
         this.userId = userId;
@@ -49,8 +51,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    private String lastName;
 
     public User(String userId, String password, String email, String firstName, String lastName) {
         this.userId = userId;

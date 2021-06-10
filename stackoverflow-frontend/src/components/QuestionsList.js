@@ -11,10 +11,11 @@ class QuestionsList extends React.Component {
                         const URL = "/question/?questionId=" + question.id;
                         return <li className='questions-item' key={question.id}>
                             <div>
-                                <Link to={URL}><h4>{question.title}</h4></Link>
+                                <Link className='question-link' to={URL}><h4>{question.title}</h4></Link>
                             </div>
                             <div>{question.question}</div>
-                            {question.tags.map(tag => (<a href="#"><b>{tag} </b></a>))}
+                            <br/>
+                            {question.tags.map(tag => (<a href="#" className="tag"><b>{tag} </b></a>))}
 
                         </li>
                     })}

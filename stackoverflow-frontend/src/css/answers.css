@@ -1,0 +1,12 @@
+.answer-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.answer-item {
+    background-color: rgb(240, 216, 216);
+    border: 1px solid rgb(240, 176, 176);
+    padding: 20px;
+    margin: 10px 0;
+}

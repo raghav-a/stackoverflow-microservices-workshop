@@ -2,6 +2,7 @@ package com.agilefaqs.stackoverflow.sessions.controllers;
 
 import com.agilefaqs.stackoverflow.sessions.clients.UserDetail;
 import com.agilefaqs.stackoverflow.sessions.model.AuthRequest;
+import com.agilefaqs.stackoverflow.sessions.model.AuthToken;
 import com.agilefaqs.stackoverflow.sessions.model.LoginRequest;
 import com.agilefaqs.stackoverflow.sessions.service.SessionsService;
 import org.slf4j.Logger;
@@ -27,10 +28,11 @@ public class SessionsController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody LoginRequest loginRequest) {
+    public AuthToken login(@RequestBody LoginRequest loginRequest) {
         System.out.println("login");
         log.info("LoginRequest received : "+loginRequest);
-        return sessionsService.login(loginRequest.getUserId(), loginRequest.getPassword());
+        String token = sessionsService.login(loginRequest.getUserId(), loginRequest.getPassword());
+        return new AuthToken(token);
     }
 
 

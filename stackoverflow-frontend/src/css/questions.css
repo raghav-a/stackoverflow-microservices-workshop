@@ -1,22 +1,40 @@
-ul {
-    list-style-type: none;
-    padding: 2px;
-}
-
-.questions-container{
-    float: left;
-    width: 70%;
-    padding: 20px;
-    height: 200px;
-}
-
 .questions-list {
-    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
 
+.question-detail{
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    padding: 20px;
 }
 
 .questions-item {
-    background-color: lightgray;
+    /* background-color: rgb(240, 239, 239); */
+    background-color: whitesmoke;
     border: 1px solid darkgray;
-    padding: 5px;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.question-link{
+    background-color: darkgrey;
+}
+
+.tag{
+    color: var(--theme-tag-color);
+    background-color: var(--theme-tag-background-color);
+    border-color: var(--theme-tag-border-color);
+    display: inline-block;
+    padding: .4em .5em;
+    margin: 2px 2px 2px 0;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
 }

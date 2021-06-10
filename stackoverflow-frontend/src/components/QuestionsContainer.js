@@ -29,12 +29,12 @@ class QuestionsContainer extends React.Component {
         fetch(apiUrl, { Method: 'GET' })
             .then((response) => response.json())
             .then((data) => this.setState({ loading: false, questions: data }))
-            .catch((e) => this.setState({ loading: false, error: true }))
-            ;
-
-
-        console.log("component did mount " + this.state.questions);
-        console.log(this.state.questions);
+            .catch((e) => {
+            console.log("Api error ", e);        
+            this.setState({ loading: false, error: true });
+            });
+        console.log("Questions container mounted with data: " + this.state.questions);
+        
     }
 }
 export default QuestionsContainer

@@ -1,4 +1,6 @@
 import React from "react"
+import AnswersList from "./AnswersList"
+
 class QuestionsDetails extends React.Component {
 
 
@@ -8,26 +10,36 @@ class QuestionsDetails extends React.Component {
         this.state = {
             loading: false,
             error: false,
-            questionId: questionId
+            questionId: questionId,            
         }
     }
 
     render() {
+        console.log("Rendering with state ", this.state);
         if (this.state.loading)
             return <div>Loading question details</div>
         if (this.state.error)
             return <div>api error in Loading question details</div>
-        if (!this.state.questionData)
-            console.log("Data is", this.state.questionData);
+        if (this.state.questionData){            
         return (
+            <div>
             <div className="question-detail">
-                <div>{this.state.questionData.title}</div>
+                <h1>{this.state.questionData.title}</h1>
+                <hr class="solid"></hr>
                 <div>{this.state.questionData.question}</div>
-                <div>Posted by - {this.state.questionData.postedBy}</div>
+                <div><b>Posted by:</b>- {this.state.questionData.postedBy}</div>
                 <div>Votes - {this.state.questionData.votes}</div>
-                {this.state.questionData.tags.map(tag => (<a href="#"><b>{tag} </b></a>))}
+                {this.state.questionData.tags.map(tag => (<a href="#" className="tag"><b>{tag} </b></a>))}
             </div>
+            <div>
+                <AnswersList questionId={this.state.questionId}/>
+            </div>
+            </div>
+        
         )
+        
+        }
+        return <div>Something</div>
     }
 
     componentDidMount() {
@@ -36,7 +48,7 @@ class QuestionsDetails extends React.Component {
         fetch(apiUrl, { Method: 'GET' })
             .then((response) => response.json())
             .then((data) => {
-                console.log("Value is ", data);
+                console.log("Question details : ", data);
                 this.setState({ loading: false, questionData: data });
             })
             .catch((e) => this.setState({ loading: false, error: true }));

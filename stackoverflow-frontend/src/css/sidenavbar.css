@@ -1,13 +1,30 @@
 .side-nav-bar {
     float: left;
     width: 20%;
-    height: 300px; /* only for demonstration, should be removed */
-    background: lightpink;
-    padding: 20px;
+    height: 100vh; 
+    overflow: auto;
+    background: white;
+    border: 2px solid;
+    border-color: whitesmoke;
+    padding: 30px;
+    justify-content: center;
+  }
+
+  .side-nav-bar-ul {
+    list-style-type: none;
+    justify-content: center;
+    padding: 30px;
+    justify-content: center;
+  }
+
+  .side-nav-bar-li {
+    justify-content: center;
+    padding: 5px;
+  }
+
+
+  .side-nav-bar-li-a {
+    padding: 5px;
+    display: block;
   }
   
-  /* Style the list inside the menu */
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }

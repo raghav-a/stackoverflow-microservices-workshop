@@ -1,6 +1,15 @@
 @import './questions.css';
 @import './header.css';
 @import './sidenavbar.css';
+@import './answers.css';
+@import './signupform.css';
+@import './loginform.css';
+
+.context-container {
+    float: left;
+    width: 70%;
+    padding: 20px;
+}
 
 
 

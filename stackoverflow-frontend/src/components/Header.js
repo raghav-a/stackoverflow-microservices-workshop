@@ -19,7 +19,7 @@ class Header extends React.Component {
                         HeaderMenuItems.map((menuItem, index) => {
                             return (
                                 <li key={index}>
-                                    <a className={menuItem.cName} href={menuItem.title}>{menuItem.title}</a>
+                                    <a className={menuItem.cName} href={menuItem.url}>{menuItem.title}</a>
                                 </li>
                             )
 
@@ -28,7 +28,7 @@ class Header extends React.Component {
                         )
                     }
                 </ul>
-                <section class="profile-section"></section>
+                <section className="profile-section"></section>
             </nav>
         )
     }
