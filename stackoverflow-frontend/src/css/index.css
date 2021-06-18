@@ -4,6 +4,7 @@
 @import './answers.css';
 @import './signupform.css';
 @import './loginform.css';
+@import './userprofile.css';
 
 .context-container {
     float: left;

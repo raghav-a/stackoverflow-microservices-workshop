@@ -7,7 +7,11 @@ public class AuthRequest {
         return token;
     }
 
-    private final String token;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
     public AuthRequest(String token) {
         this.token = token;

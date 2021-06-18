@@ -10,9 +10,11 @@ server:
   tomcat.max-threads: 100
     
 eureka:
+  renewalPercentThreshold: 0.85
   client:
     registerWithEureka: false
     fetchRegistry: false
   server:
-    enableSelfPreservation: true
+    enableSelfPreservation: false
     eviction-interval-timer-in-ms: 1000
+    wait-time-in-ms-when-sync-empty: 0

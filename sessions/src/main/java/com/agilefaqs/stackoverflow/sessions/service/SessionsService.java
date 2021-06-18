@@ -4,6 +4,7 @@ import com.agilefaqs.stackoverflow.exceptions.ApplicationException;
 import com.agilefaqs.stackoverflow.sessions.clients.UserDetail;
 import com.agilefaqs.stackoverflow.sessions.clients.UsersClient;
 import com.agilefaqs.stackoverflow.sessions.dao.SessionsDao;
+import com.agilefaqs.stackoverflow.sessions.model.AuthResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +37,21 @@ public class SessionsService {
     }
 
 
-    public String login(String userId, String password) {
-        final UserDetail userDetails = usersClient.getUserDetails(userId);
-        if(userDetails==null)
-        {
-            throw new ApplicationException("User Id Incorrect", HttpStatus.NOT_FOUND);
+    public AuthResponse login(String userId, String password) {
+        try {
+            final UserDetail userDetails = usersClient.getUserDetails(userId);
+            if (userDetails == null) {
+                throw new ApplicationException("User Id Incorrect", HttpStatus.NOT_FOUND);
+            }
+            if (!userDetails.getPassword().equals(password)) {
+                throw new ApplicationException("Password Incorrect", HttpStatus.BAD_REQUEST);
+            }
+            return new AuthResponse(
+                    generateToken(userId, userDetails),
+                    userDetails);
+        }catch (RuntimeException e){
+            throw new ApplicationException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(!userDetails.getPassword().equals(password))
-        {
-            throw new ApplicationException("Password Incorrect", HttpStatus.BAD_REQUEST);
-        }
-        return generateToken(userId, userDetails);
     }
 
     private String generateToken(String userId, UserDetail userDetails) {

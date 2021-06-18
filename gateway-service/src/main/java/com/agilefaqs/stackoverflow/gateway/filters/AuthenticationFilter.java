@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StreamUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 import static org.bouncycastle.crypto.tls.CipherType.stream;
 
@@ -59,15 +61,26 @@ public class AuthenticationFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         try {
             HttpServletRequest request = ctx.getRequest();
+            log.info("All cookies : " +request.getCookies());
             log.info("request uri : " + request.getRequestURI());
-            final String token = request.getHeader("token");
-            final AuthRequest authRequest = new AuthRequest(token);
+
+            final AuthRequest authRequest = new AuthRequest(null);
+            if(request.getCookies() !=null){
+                for (Cookie cookie: request.getCookies()){
+                    if(cookie.getName().equals("user-auth-token"))
+                        log.info(String.format("Cookie found : %s", cookie.getValue()));
+                        authRequest.setToken(cookie.getValue());
+
+                }
+            }
+
             if (authConfig.needsAuthentication(request.getRequestURI(), request.getMethod())) {
                 UserDetail userDetail = sessionsClient.validateToken(authRequest);
                 log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
                 log.info(String.format("Is response valid : %s", userDetail!=null));
                 Preconditions.checkNotNull(userDetail);
                 ctx.addZuulRequestHeader("X-USER-ID", userDetail.getUserId());
+                ctx.addZuulRequestHeader("token", authRequest.getToken());
                 request.getUserPrincipal();
 
             }

@@ -1,26 +1,31 @@
-import React from "react"
-import { HeaderMenuItems } from "./HeaderMenuItems"
+import React, { useContext } from "react"
+import { Link } from "react-router-dom"
+import { getMenuItems } from "./HeaderMenuItems"
+import UserContext from "../contexts/User/UserContext"
 
-class SideNavBar extends React.Component {
-    render() {
-        return (
-            <nav className="side-nav-bar">
-                <ul className="side-nav-bar-ul">
-                    {
-                        HeaderMenuItems.map((menuItem, index) => {
-                            return (
-                                <li className="side-nav-bar-li" key={index}>
-                                    <a className='side-nav-bar-li-a' href={menuItem.url}>{menuItem.title}</a>
-                                </li>
-                            )
+function SideNavBar() {
 
-                        }
+    const { user } = useContext(UserContext);
+    const loggedInUser = user ? user.token != null : false;
 
+    return (
+        <nav className="side-nav-bar">
+            <ul className="side-nav-bar-ul">
+                {
+                    getMenuItems(loggedInUser).map((menuItem, index) => {
+                        return (
+                            <li className="side-nav-bar-li" key={index}>
+                                <Link className='side-nav-bar-li-a' to={menuItem.url}>{menuItem.title}</Link>
+                            </li>
                         )
+
                     }
-                </ul>
-            </nav>
-        )
-    }
+
+                    )
+                }
+            </ul>
+        </nav>
+    )
+
 }
 export default SideNavBar

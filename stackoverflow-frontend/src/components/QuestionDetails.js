@@ -1,61 +1,69 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import AnswersList from "./AnswersList"
+import fetchWrapper from '../services/wrapper';
 
-class QuestionsDetails extends React.Component {
 
+function QuestionsDetails(props) {
 
-    constructor(props) {
-        super(props)
-        const questionId = new URLSearchParams(this.props.location.search).get("questionId");
-        this.state = {
-            loading: false,
-            error: false,
-            questionId: questionId,            
-        }
+    const questionIdValue = new URLSearchParams(props.location.search).get("questionId");
+    console.log("Value of question id is" + questionIdValue);
+    const [state, setState] = useState({
+        loading: false,
+        error: false,
+        questionId: questionIdValue,
+    });
+
+    console.log("Value of state question id is", state);
+
+    const updateState = (data) => {
+        setState({
+            ...state, //need to understand thiss
+            ...data
+        })
     }
 
-    render() {
-        console.log("Rendering with state ", this.state);
-        if (this.state.loading)
-            return <div>Loading question details</div>
-        if (this.state.error)
-            return <div>api error in Loading question details</div>
-        if (this.state.questionData){            
+    useEffect(() => {
+        console.log("Calling ueEffect");
+        const apiUrl = `http://localhost:8765/api/questions/${state.questionId}`;
+        updateState({ loading: true })
+        fetchWrapper(apiUrl, {
+            method: 'GET'
+        }).then((data) => {
+            console.log("Question details : ", data);
+            updateState({ loading: false, questionData: data });
+        }).catch((e) => updateState({ loading: false, error: true }));
+    }, []);
+
+
+    console.log("Rendering with state ", state);
+    if (state.loading)
+        return <div>Loading question details</div>
+    if (state.error)
+        return <div>api error in Loading question details</div>
+    if (state.questionData) {
         return (
             <div>
-            <div className="question-detail">
-                <h1>{this.state.questionData.title}</h1>
-                <hr class="solid"></hr>
-                <div>{this.state.questionData.question}</div>
-                <div><b>Posted by:</b>- {this.state.questionData.postedBy}</div>
-                <div>Votes - {this.state.questionData.votes}</div>
-                {this.state.questionData.tags.map(tag => (<a href="#" className="tag"><b>{tag} </b></a>))}
+                <div className="question-detail">
+                    <h1>{state.questionData.title}</h1>
+                    <hr className="solid"></hr>
+                    <div>
+                        <a href="upvote"><i className="fas fa-angle-up"></i></a>
+                        <a href="downvote"><i className="fas fa-angle-down"></i></a>
+                    </div>
+                    <div>{state.questionData.question}</div>
+                    <div><b>Posted by:</b>- {state.questionData.postedBy}</div>
+                    <div>Votes - {state.questionData.votes}</div>
+                    {state.questionData.tags.map(tag => (<a key={tag} href="#" className="tag"><b>{tag} </b></a>))}
+                </div>
+                <div>
+                    <AnswersList questionId={state.questionId} />
+                </div>
             </div>
-            <div>
-                <AnswersList questionId={this.state.questionId}/>
-            </div>
-            </div>
-        
+
         )
-        
-        }
-        return <div>Something</div>
+
     }
-
-    componentDidMount() {
-        const apiUrl = `http://localhost:8765/api/questions/${this.state.questionId}`;
-        this.setState({ loading: true })
-        fetch(apiUrl, { Method: 'GET' })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Question details : ", data);
-                this.setState({ loading: false, questionData: data });
-            })
-            .catch((e) => this.setState({ loading: false, error: true }));
-
-
-        // console.log("component did mount " + this.state.questions);
-        // console.log(this.state.questions);
-    }
+    return <div>Something</div>
 }
+
 export default QuestionsDetails

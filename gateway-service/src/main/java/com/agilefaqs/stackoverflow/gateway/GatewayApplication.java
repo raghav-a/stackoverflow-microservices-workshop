@@ -4,6 +4,8 @@ import com.agilefaqs.stackoverflow.gateway.clients.SessionsClient;
 import com.agilefaqs.stackoverflow.gateway.config.AuthConfig;
 import com.agilefaqs.stackoverflow.gateway.filters.AuthenticationFilter;
 import com.agilefaqs.stackoverflow.gateway.filters.ErrorFilter;
+import com.agilefaqs.stackoverflow.gateway.filters.PostAuthFilter;
+import org.apache.catalina.filters.RequestDumperFilter;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import javax.servlet.Filter;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.HTTPS_SCHEME;
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.HTTP_SCHEME;
@@ -47,8 +51,14 @@ public class GatewayApplication {
 
     @Bean
     @Autowired
-    public AuthenticationFilter filter(SessionsClient sessionsClient, AuthConfig authConfig) {
+    public AuthenticationFilter authenticationFilter(SessionsClient sessionsClient, AuthConfig authConfig) {
         return new AuthenticationFilter(sessionsClient, authConfig);
+    }
+
+    @Bean
+    @Autowired
+    public PostAuthFilter postAuthFilter() {
+        return new PostAuthFilter();
     }
 
 
@@ -94,6 +104,15 @@ public class GatewayApplication {
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(0);
         return bean;
+    }
+
+    @Bean
+    public FilterRegistrationBean requestDumperFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        Filter requestDumperFilter = new RequestDumperFilter();
+        registration.setFilter(requestDumperFilter);
+        registration.addUrlPatterns("/*");
+        return registration;
     }
 
 

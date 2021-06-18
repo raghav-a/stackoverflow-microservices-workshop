@@ -1,27 +1,36 @@
-import React from "react"
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import Pagination from "./Pagination";
+import Question from "./Question";
 
-class QuestionsList extends React.Component {
-    render() {
-        console.log("render of QuestionsList " + this.props.questions);
-        return (
+function QuestionsList(props) {
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(7);
+
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentPosts = props.questions.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = (currentPage) => setCurrentPage(currentPage)
+
+
+
+    //console.log("render of QuestionsList " + this.props.questions);
+    return (
+        <div>
             <div className='questions-container'>
                 <ul className='questions-list'>
-                    {this.props.questions.map(question => {
-                        const URL = "/question/?questionId=" + question.id;
-                        return <li className='questions-item' key={question.id}>
-                            <div>
-                                <Link className='question-link' to={URL}><h4>{question.title}</h4></Link>
-                            </div>
-                            <div>{question.question}</div>
-                            <br/>
-                            {question.tags.map(tag => (<a href="#" className="tag"><b>{tag} </b></a>))}
+                    {currentPosts.map(question => {
 
+                        return <li className='questions-item' key={question.id}>
+                            <Question question={question} />
                         </li>
                     })}
                 </ul>
+
             </div>
-        )
-    }
+            <Pagination postsPerPage={itemsPerPage} totalPosts={props.questions.length} paginate={paginate} />
+        </div>
+    )
 }
 export default QuestionsList

@@ -1,38 +1,42 @@
-import React from "react"
-import { HeaderMenuItems } from "./HeaderMenuItems"
+import React, { useState, useContext } from "react"
+import { getMenuItems } from "./HeaderMenuItems"
+import UserContext from '../contexts/User/UserContext'
+import { Link } from 'react-router-dom'
 
-class Header extends React.Component {
-    state = { clicked: false }
+export default function ({ title = "StackOverflow" }) {
+    // state = { clicked: false }
+    const [clicked, setClicked] = useState(false);
+    const { user } = useContext(UserContext);
 
-    handleClick = () => {
-        this.setState({ clicked: !this.state.clicked })
+    console.log("User is ", user);
+    const handleClick = () => {
+        setClicked(!clicked);
     }
 
-    render() {
-        return (
-            <nav className="header-navigation">
-                <h1 className="navbar-logo">Stackoverflow<i className="fab fa-react"></i></h1>
-                <div className="menu-icon" onClick={this.handleClick}>
-                    <i className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}></i></div>
-                <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"} >
-                    {
-                        HeaderMenuItems.map((menuItem, index) => {
-                            return (
-                                <li key={index}>
-                                    <a className={menuItem.cName} href={menuItem.url}>{menuItem.title}</a>
-                                </li>
-                            )
+    const userElement = user ? <div>Welcome {user.userDetail.firstName} !!!</div> : <div></div>
+    const loggedInUser = user ? user.token != null : false;
 
-                        }
+    return (
+        <nav className="header-navigation">
+            <h1 className="navbar-logo">{title}<i className="fab fa-react"></i></h1>
 
+            <h2 className="header-user-name">{userElement}</h2>
+            <ul className={clicked ? "nav-menu active" : "nav-menu"} >
+                {
+                    getMenuItems(loggedInUser).map((menuItem, index) => {
+                        return (
+                            <li key={index}>
+                                <Link className={menuItem.cName} to={menuItem.url}>{menuItem.title} </Link>
+                            </li>
                         )
-                    }
-                </ul>
-                <section className="profile-section"></section>
-            </nav>
-        )
-    }
-}
-export default Header
 
-// npm install react-router-dom
+                    }
+
+                    )
+                }
+            </ul>
+            <section className="profile-section"></section>
+        </nav>
+    )
+
+}
