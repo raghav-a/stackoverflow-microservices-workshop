@@ -8,13 +8,13 @@ function UserProfile() {
 
     return (
         <div className='user-profile'>
-            <label>First Name : </label>{user.userDetail.firstName}
+            <label>First Name : </label>{user.firstName}
             <br />
-            <label>Last Name : </label>{user.userDetail.lastName}
+            <label>Last Name : </label>{user.lastName}
             <br />
-            <label>User Id : </label>{user.userDetail.userId}
+            <label>User Id : </label>{user.userId}
             <br />
-            <label>Email : </label>{user.userDetail.email}
+            <label>Email : </label>{user.email}
 
         </div>)
 }

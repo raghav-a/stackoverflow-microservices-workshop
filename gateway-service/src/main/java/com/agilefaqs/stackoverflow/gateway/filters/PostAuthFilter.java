@@ -40,40 +40,37 @@ public class PostAuthFilter extends ZuulFilter {
     @Override
     public Object run() {
         RequestContext context = RequestContext.getCurrentContext();
-        //logger.info("Zuul post auth filter context path: {}", context.getRequest().getContextPath());
-        logger.info("Zuul post auth filter context path: {}", context.getRequest());
-        logger.info("Zuul post auth filter context path: {}", context.getRequest().getRequestURI());
-        //logger.info("Zuul post auth filter context path: {}", context.getRouteHost().getPath());
-        //logger.info("Zuul post auth filter context path: {}", context.getRequest().getRequestURI());
         if (context.getRequest().getRequestURI().equals("/api/sessions/login")
         && context.getResponse().getStatus() == 200
         ){
 
             logger.info("Zuul post auth filter for successful auth");
             try (final InputStream responseDataStream = context.getResponseDataStream()) {
-                if(responseDataStream == null) {
-                    logger.info("Zuul post auth filter BODY: {}", "");
-                    return null;
-                }
-
                 String responseData = CharStreams.toString(new InputStreamReader(responseDataStream, "UTF-8"));
-                logger.info("1. Zuul post auth filter BODY: {}", responseData);
+                logger.info("Zuul post auth filter BODY: {}", responseData);
                 JsonObject jsonObject = new JsonParser().parse(responseData).getAsJsonObject();
-                logger.info("2. Zuul post auth filter for successful auth {} "+jsonObject);
+                logger.info("Zuul post auth filter response JSON{} ",jsonObject);
 
-                logger.info("4. Zuul post auth filter for successful auth token {} "+jsonObject.get("token").getAsString());
-               // logger.info("3. Zuul post auth filter for successful auth {} "+jsonObject.getAsString());
                 Cookie authCookie = new Cookie("user-auth-token", jsonObject.get("token").getAsString());
                 authCookie.setDomain("localhost");
                 authCookie.setPath("/");
-                authCookie.setHttpOnly(true);
+                //authCookie.setHttpOnly(true);
+
+              /*  Cookie userDetail = new Cookie("user-detail", jsonObject.get("userDetail").toString());
+                logger.info(" User Detail is {}",jsonObject.get("userDetail").toString());
+                userDetail.setDomain("localhost");
+                userDetail.setPath("/");
+                userDetail.setHttpOnly(true);*/
+
+                logger.info("Zuul post auth filter : Setting cookie {}",authCookie.getValue());
                 context.getResponse().addCookie(authCookie);
+                //context.getResponse().addCookie(userDetail);
                 context.setResponseBody(responseData);
-                logger.info("Zuul post auth filter for successful auth token {} "+jsonObject.get("token").getAsString());
             }
             catch (Exception e) {
-                logger.error(e.getMessage(),e);
+                logger.error("Something blew up while setting cookies "+ e.getMessage(),e);
                 //throw new ZuulException(e, INTERNAL_SERVER_ERROR.value(), e.getMessage());
+                throw new RuntimeException(e);
             }
 
         }

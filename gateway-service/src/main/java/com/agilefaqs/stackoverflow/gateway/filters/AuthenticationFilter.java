@@ -85,6 +85,13 @@ public class AuthenticationFilter extends ZuulFilter {
 
             }
 
+            if(request.getRequestURI().equals("/api/sessions/authenticateToken") && authRequest.getToken()!=null){
+                log.info("Setting authToken in query param");
+                request.setAttribute("authToken",authRequest.getToken());
+                ctx.addZuulRequestHeader("X-AUTH-TOKEN", authRequest.getToken());
+                log.info("Setting authToken in query param {} "+request.getAttribute("authToken"));
+            }
+
         } catch (RuntimeException e) {
             e.printStackTrace();
             log.info("Error message " + e.getMessage());

@@ -2,19 +2,19 @@ import React, { useState, useContext } from "react"
 import { getMenuItems } from "./HeaderMenuItems"
 import UserContext from '../contexts/User/UserContext'
 import { Link } from 'react-router-dom'
+import { Button } from "@material-ui/core";
 
 export default function ({ title = "StackOverflow" }) {
     // state = { clicked: false }
     const [clicked, setClicked] = useState(false);
     const { user } = useContext(UserContext);
 
-    console.log("User is ", user);
+    console.log("Header : User is ", user);
     const handleClick = () => {
         setClicked(!clicked);
     }
 
-    const userElement = user ? <div>Welcome {user.userDetail.firstName} !!!</div> : <div></div>
-    const loggedInUser = user ? user.token != null : false;
+    const userElement = user ? <div>Welcome {user.firstName} !!!</div> : <div></div>
 
     return (
         <nav className="header-navigation">
@@ -23,10 +23,14 @@ export default function ({ title = "StackOverflow" }) {
             <h2 className="header-user-name">{userElement}</h2>
             <ul className={clicked ? "nav-menu active" : "nav-menu"} >
                 {
-                    getMenuItems(loggedInUser).map((menuItem, index) => {
+                    getMenuItems(user != null).map((menuItem, index) => {
                         return (
                             <li key={index}>
-                                <Link className={menuItem.cName} to={menuItem.url}>{menuItem.title} </Link>
+                                <Link to={menuItem.url}>
+                                    <Button variant="contained" color="primary">
+                                        {menuItem.title}
+                                    </Button>
+                                </Link>
                             </li>
                         )
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import fetchWrapper from '../services/wrapper';
 
 function AnswersList(props) {
     const [state, setState] = useState({
@@ -18,7 +19,7 @@ function AnswersList(props) {
     useEffect(() => {
         const apiUrl = 'http://localhost:8765/api/answers/getAll'
         updateState({ loading: true })
-        fetch(apiUrl,
+        fetchWrapper(apiUrl,
             {
                 Method: 'GET',
                 headers: {

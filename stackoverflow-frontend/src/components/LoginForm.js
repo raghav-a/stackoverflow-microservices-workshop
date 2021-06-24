@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react"
 import { setCookie } from '../utils/cookies';
 import UserContext from "../contexts/User/UserContext";
 import { login } from '../services/auth';
+import fetchWrapper from '../services/wrapper';
+
 
 function LoginForm() {
     const { user, setUser } = useContext(UserContext);
@@ -27,12 +29,12 @@ function LoginForm() {
         login(state.userId, state.password)
             .then(data => {
                 console.log("Login response is : ", data);
-                setCookie('user-token', data.token);
+                //setCookie('user-token', data.token);
                 updateState({
                     loading: false,
                     token: data.token
                 });
-                setUser(data);
+                setUser(data.userDetail);
             })
             .catch(e => {
                 console.log("Login error is : ", e);
@@ -47,7 +49,7 @@ function LoginForm() {
     const mySubmitHandler = (event) => {
         event.preventDefault();
         const apiUrl = 'http://localhost:8765/api/sessions/login'
-        fetch(apiUrl,
+        fetchWrapper(apiUrl,
             {
                 method: 'POST',
                 headers: {
@@ -58,7 +60,6 @@ function LoginForm() {
                     password: state.password
                 })
             })
-            .then((response) => response.json())
             .then((data) => {
                 console.log("Login response is : ", data);
                 setCookie('user-token', data.token);

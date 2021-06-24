@@ -18,11 +18,6 @@ const MenuItemsForGuest = [
         title: "Signup",
         url: "/signup",
         cName: "nav-links s-btn"
-    },
-    {
-        title: "Profile",
-        url: "/profile",
-        cName: "nav-links s-btn"
     }
 ]
 
